@@ -379,7 +379,7 @@ namespace Storeonline.Models
         public int FeedbackID { get; set; }
 
         [DisplayName("Tên khách hàng")]
-        [Required(ErrorMessage = "Vui lòng nhập")]
+        //[Required(ErrorMessage = "Vui lòng nhập")]
         public string FirstName { get; set; }
 
         [DisplayName("Địa chỉ")]
