@@ -401,7 +401,7 @@ namespace Storeonline.Models
         [DisplayName("Trạng thái")]
         public bool Status { get; set; }
 
-      
+        [DisplayName("Thời gian tạo")]
         public DateTime CreateDate { get; set; }
     }
 }
