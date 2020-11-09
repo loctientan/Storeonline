@@ -416,6 +416,9 @@ namespace Storeonline.Models
         [Key]
         public int FeedbackID { get; set; }
 
+        [DisplayName("Mã Feedback")]
+        public string FeedbackCode { get; set; }
+
         [DisplayName("Tên khách hàng")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string FirstName { get; set; }
