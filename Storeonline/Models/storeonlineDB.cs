@@ -43,6 +43,11 @@ namespace Storeonline.Models
         [DisplayName("Hiển thị tại trang chủ")]
         public bool ShowOnHome { get; set; }
 
+        public virtual ICollection<Product> product { get; set; }
+        
+        [NotMapped]
+        public List<ProductCategory> productcategories { get; set; }
+
     }
 
     public class Product 
@@ -117,6 +122,17 @@ namespace Storeonline.Models
         [DisplayName("Lượt xem")]
         public int ViewCounts {get; set; }
 
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+        public virtual ICollection<Invoice> invoice { get; set; }
+
+        public virtual ICollection<InvoiceDetails> detailsinvoice { get; set; }
+
+        public ProductCategory productcategory { get; set; }
+
+        public virtual ICollection<Cart> cart { get; set; }
+
 
     }
 
@@ -168,8 +184,14 @@ namespace Storeonline.Models
         //[Required(ErrorMessage = "Vui lòng nhập")]
         public string Position { get; set; }
 
-
         [ForeignKey("Role")] public int? IdRole { get; set; }
+        
+        [NotMapped]
+        public string LoginError { get; set; }
+
+        public Role role { get; set; }
+
+        public virtual ICollection<Cart> cart { get; set; }
     }
 
     public class Role
@@ -185,6 +207,7 @@ namespace Storeonline.Models
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string Details { get; set; }
 
+        public virtual ICollection<User> user { get; set; }
     }
 
     public class Cart
@@ -256,6 +279,8 @@ namespace Storeonline.Models
         [DisplayName("Mã khách hàng")]
         public string UserCode { get; set; }
 
+        public virtual ICollection<InvoiceDetails> invoicedetails { get; set; }
+
 
     }
 
@@ -285,6 +310,9 @@ namespace Storeonline.Models
 
         [DisplayName("Số lượng")]
         public int Quantity { get; set; }
+
+        public Invoice invoice { get; set; }
+        public Product product { get; set; }
     }
 
     public class NewsCategory
@@ -321,6 +349,10 @@ namespace Storeonline.Models
         [DisplayName("Hiển thị trên trang chủ")]
         public bool TopHot { get; set; }
 
+        public virtual ICollection<News> news { get; set; }
+
+        [NotMapped]
+        public List<NewsCategory> newscategories { get; set; }
 
     }
 
@@ -371,6 +403,12 @@ namespace Storeonline.Models
 
         [DisplayName("Lượt xem")]
         public int ViewCount { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+        public NewsCategory newscategory { get; set; }
+
     }
 
     public class Feedback
