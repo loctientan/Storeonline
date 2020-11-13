@@ -271,12 +271,12 @@ h2 {
     .nav .navbar-brand {
         display: none;
     }
-    
-    .nav .navbar-dark a.nav-link {
-        color: #ffffff;
-        font-size: 14px;
-        text-transform: uppercase;
-    }
+
+        .nav .navbar-dark a.nav-link {
+            color: #ef1a05;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
     
     .nav .navbar-dark a.nav-link:hover,
     .nav .navbar-dark a.nav-link.active {
