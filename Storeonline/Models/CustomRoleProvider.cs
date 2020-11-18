@@ -16,7 +16,7 @@ namespace Storeonline.Models
             User account = db.Users.Single(x => x.Username.Equals(Name));
             if (account != null)
             {
-                return new String[] { account.IdRole.ToString() };
+                return new String[] { account.RoleID.ToString() };
             }
             else
                 return new String[] { };

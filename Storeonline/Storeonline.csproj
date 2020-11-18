@@ -127,11 +127,43 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\CartsController.cs" />
+    <Compile Include="Areas\admin\Controllers\FeedbacksController.cs" />
+    <Compile Include="Areas\admin\Controllers\InvoiceDetailsController.cs" />
+    <Compile Include="Areas\admin\Controllers\InvoicesController.cs" />
+    <Compile Include="Areas\admin\Controllers\NewsCategoriesController.cs" />
+    <Compile Include="Areas\admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\admin\Controllers\ProductCategoriesController.cs" />
+    <Compile Include="Areas\admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011090610506_UP.cs" />
+    <Compile Include="Migrations\202011090610506_UP.designer.cs">
+      <DependentUpon>202011090610506_UP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011160637516_1.cs" />
+    <Compile Include="Migrations\202011160637516_1.designer.cs">
+      <DependentUpon>202011160637516_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011160642374_2.cs" />
+    <Compile Include="Migrations\202011160642374_2.designer.cs">
+      <DependentUpon>202011160642374_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011160648450_3.cs" />
+    <Compile Include="Migrations\202011160648450_3.designer.cs">
+      <DependentUpon>202011160648450_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011181308106_Up1.cs" />
+    <Compile Include="Migrations\202011181308106_Up1.designer.cs">
+      <DependentUpon>202011181308106_Up1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\connectDB.cs" />
+    <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\storeonlineDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -169,6 +201,54 @@
     <Content Include="Content\lib\slick\slick-theme.scss" />
     <Content Include="Content\lib\slick\slick.less" />
     <Content Include="Content\lib\slick\slick.scss" />
+    <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Areas\admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\admin\Views\ProductCategories\Create.cshtml" />
+    <Content Include="Areas\admin\Views\ProductCategories\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\ProductCategories\Details.cshtml" />
+    <Content Include="Areas\admin\Views\ProductCategories\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\ProductCategories\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\admin\Views\NewsCategories\Create.cshtml" />
+    <Content Include="Areas\admin\Views\NewsCategories\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\NewsCategories\Details.cshtml" />
+    <Content Include="Areas\admin\Views\NewsCategories\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\NewsCategories\Index.cshtml" />
+    <Content Include="Areas\admin\Views\News\Create.cshtml" />
+    <Content Include="Areas\admin\Views\News\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\News\Details.cshtml" />
+    <Content Include="Areas\admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\News\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Carts\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Carts\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Carts\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Carts\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Carts\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Invoices\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Invoices\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Invoices\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Invoices\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Invoices\Index.cshtml" />
+    <Content Include="Areas\admin\Views\InvoiceDetails\Create.cshtml" />
+    <Content Include="Areas\admin\Views\InvoiceDetails\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\InvoiceDetails\Details.cshtml" />
+    <Content Include="Areas\admin\Views\InvoiceDetails\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\InvoiceDetails\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -197,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -210,6 +291,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011090610506_UP.resx">
+      <DependentUpon>202011090610506_UP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011160637516_1.resx">
+      <DependentUpon>202011160637516_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011160642374_2.resx">
+      <DependentUpon>202011160642374_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011160648450_3.resx">
+      <DependentUpon>202011160648450_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011181308106_Up1.resx">
+      <DependentUpon>202011181308106_Up1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
