@@ -1,10 +1,19 @@
-﻿@model IEnumerable<Storeonline.Models.ProductCategory>
+﻿@model PagedList.IPagedList<Storeonline.Models.Product>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Home Page";
 }
 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
 <body>
-    <!-- Main Slider Start -->
+    @*Main Slider Start*@
     <div class="header">
         <div class="container-fluid">
             <div class="row">
@@ -41,21 +50,21 @@
                 <div class="col-md-6">
                     <div class="header-slider normal-slider">
                         <div class="header-slider-item">
-                            <img src="img/slider-1.jpg" alt="Slider Image" />
+                            <img src="#" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
                             </div>
                         </div>
                         <div class="header-slider-item">
-                            <img src="img/slider-2.jpg" alt="Slider Image" />
+                            <img src="#" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
                             </div>
                         </div>
                         <div class="header-slider-item">
-                            <img src="img/slider-3.jpg" alt="Slider Image" />
+                            <img src="#" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Some text goes here that describes the image</p>
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
@@ -66,13 +75,13 @@
                 <div class="col-md-3">
                     <div class="header-img">
                         <div class="img-item">
-                            <img src="img/category-1.jpg" />
+                            <img src="#" />
                             <a class="img-text" href="">
                                 <p>Some text goes here that describes the image</p>
                             </a>
                         </div>
                         <div class="img-item">
-                            <img src="img/category-2.jpg" />
+                            <img src="#" />
                             <a class="img-text" href="">
                                 <p>Some text goes here that describes the image</p>
                             </a>
@@ -82,90 +91,48 @@
             </div>
         </div>
     </div>
-    <!-- Main Slider End -->
-    <!-- Brand Start -->
+    @*Main Slider End
+        Brand Start*@
     <div class="brand">
         <div class="container-fluid">
             <div class="brand-slider">
-                <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+
             </div>
         </div>
     </div>
-    <!-- Brand End -->
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParentID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShowOnHome)
-            </th>
-            <th></th>
-        </tr>
+    @*Brand End*@
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParentID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShowOnHome)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-                </td>
-            </tr>
-        }
 
-    </table>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                int discount = item.Price - item.PromotionPrice;
+                <div class="card" style="width:16rem;margin:10px">
+
+                    <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID})">
+                        <div class="img">
+                            <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID })">
+                            <h3 class="card-title">@item.ProductName</h3>
+                            <p class="card-text"> @item.Description</p>
+                            <h4 style="color:red; font-size:larger;font-weight:bold ;font-family:'Noto Serif'"> @discount.ToString("#,#00")đ </h4>
+                            <strike style="color:gray"><h5 style="color:gray;font-size:small;font-family:'Noto Serif'"> @item.Price.ToString("#,#00")đ  </h5></strike>
+                        </a>
+                        <br />
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+    <div class="col-sm-12" style="text-align:center;">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
 </body>
+</html>

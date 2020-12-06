@@ -11,6 +11,7 @@ namespace Storeonline.Models
 {
     public class ProductCategory
     {
+
         [Key]
         [DisplayName("Nhà sản xuất")]
         public int CategoryID { get; set; }
@@ -53,7 +54,13 @@ namespace Storeonline.Models
 
     public class Product 
     {
-       [Key]
+        public Product()
+        {
+            ProductImage = "~/Content/Image/Products/phonedemo.png";
+        }
+
+
+        [Key]
        public int ProductID { get; set;}
 
        [DisplayName("Mã sản phẩm")]
@@ -69,19 +76,14 @@ namespace Storeonline.Models
         public string Description { get; set; }
 
         [DisplayName("Ảnh sản phẩm")]
-        [Required(ErrorMessage = "Vui lòng nhập")]
         public string ProductImage { get; set; }
 
-        public Product()
-        {
-            ProductImage = "";
-        }
 
         [DisplayName("Giá sản phẩm")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public int Price { get; set; }
 
-        [DisplayName("Giá khuyến mãi")]
+        [DisplayName("Khuyến mãi")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public int PromotionPrice { get; set; }
 
@@ -117,14 +119,16 @@ namespace Storeonline.Models
         [DisplayName("Trạng thái")]
         public bool Status { get; set; }
 
+        [DisplayName("Hiển thị tại trang chủ")]
+        public bool ShowOnHome { get; set; }
+
+
         [DisplayName("Top Hot")]
         public DateTime TopHot { get; set; }
 
         [DisplayName("Lượt xem")]
         public int ViewCounts {get; set; }
 
-        [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
 
         public virtual ICollection<Invoice> Invoices { get; set; }
 
@@ -133,6 +137,9 @@ namespace Storeonline.Models
         public ProductCategory ProductCategorys { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
 
 
     }
@@ -196,6 +203,9 @@ namespace Storeonline.Models
         public Role Role { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 
     public class Role
@@ -448,6 +458,9 @@ namespace Storeonline.Models
 
         [DisplayName("Thời gian tạo")]
         public DateTime? CreateDate { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 
     public class OrderStatusCategory

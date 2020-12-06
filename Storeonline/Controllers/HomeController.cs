@@ -5,30 +5,117 @@ using System.Web;
 using System.Web.Mvc;
 using Storeonline.Models;
 using Storeonline.Areas.admin.Controllers;
+using PagedList;
+using System.Net;
 
 namespace Storeonline.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private connectDB db = new connectDB();
+        // GET: Home
+        public ActionResult Index(string id, int? page)
         {
-            connectDB db = new connectDB();
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
 
-            return View(db.ProductCategories.ToList());
+            if (page == null)
+                page = 1;
+
+            //Phân loại sản phẩm
+            if (!String.IsNullOrEmpty(id))
+            {
+                int temp = Convert.ToInt32(id);
+                var result = (from r in db.Products
+                              where r.CategoryID == temp
+                              select r).OrderBy(x => x.ProductID);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+            var links = (from l in db.Products
+                         select l).OrderBy(x => x.ProductID);
+
+            return View(links.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult About()
+        // GET: Home/Details/5
+        public ActionResult DetailProducts(int? id)
         {
-            ViewBag.Message = "Your application description page.";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
 
+        // GET: Home/Create
+        public ActionResult Create()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        // POST: Home/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
-            ViewBag.Message = "Your contact page.";
+            try
+            {
+                // TODO: Add insert logic here
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Edit/5
+        public ActionResult Edit(int id)
+        {
             return View();
+        }
+
+        // POST: Home/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

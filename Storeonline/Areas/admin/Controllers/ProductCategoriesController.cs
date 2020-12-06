@@ -37,7 +37,7 @@ namespace Storeonline.Areas.admin.Controllers
 
         // GET: admin/ProductCategories/Create
         public ActionResult Create()
-        {            
+        {
             return View();
         }
 
@@ -48,10 +48,8 @@ namespace Storeonline.Areas.admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,Name,Description,ParentID,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,ShowOnHome")] ProductCategory productCategory)
         {
- 
             if (ModelState.IsValid)
             {
-                productCategory.CreateDate = DateTime.Now;
                 db.ProductCategories.Add(productCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");

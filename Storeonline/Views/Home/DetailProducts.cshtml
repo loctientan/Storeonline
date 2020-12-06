@@ -1,0 +1,58 @@
+﻿
+@model Storeonline.Models.Product
+@{
+    ViewBag.Title = "DetailsProducts";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetailProducts</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card mb-3" style="margin:50px">
+                <div style="font-family:Noto Serif, serif">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="@Url.Content(Model.ProductImage)" style="margin:50px;height: 80%;width: 70%;" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h2 class="card-title" style="text-align:center; font-weight:bold; text-transform:capitalize;;font-family:'Noto Serif'">
+                                  @Model.ProductName @Model.ProductCode
+                                </h2>
+                                <dl class="dl-horizontal">
+                                    <h4 style="color:red;font-size:xx-large;font-family:'Noto Serif'"> @Html.DisplayFor(model => model.Price)đ</h4>
+                                    <dd style="font-size:medium; padding:5px;">
+                                        @Html.DisplayFor(model => model.PromotionPrice)
+                                    </dd>
+                                    <dt style="text-align:left; font-size:medium; padding:5px;">
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </dt>
+
+                                    <dd style="font-size:medium; padding:5px;">
+                                        @Html.DisplayFor(model => model.Detail)
+                                    </dd>
+
+                                    <dt style="text-align:left; font-size:medium; padding:5px;">
+                                        @Html.DisplayNameFor(model => model.Warranty)
+                                    </dt>
+
+                                    <a class="btn btn-primary" href="@Url.Action("", "", new { id = Model.ProductID })" style="height:auto">
+                                        MUA NGAY
+                                    </a>
+                                </dl>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
