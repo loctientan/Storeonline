@@ -28,11 +28,11 @@ namespace Storeonline.Areas.admin.Controllers
                 if (test.Username != "admin")// khong phai admin
                 {
                     Session["Username"] = check.Username;
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else//neu la admin
                 {
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Index", "Products");
                 }
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -40,6 +41,7 @@ namespace Storeonline.Areas.admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name");
+     
             return View();
         }
 
@@ -48,17 +50,26 @@ namespace Storeonline.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductCode,ProductName,Description,ProductImage,Price,PromotionPrice,Quantity,CategoryID,Detail,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,TopHot,ViewCounts")] Product product)
+        public ActionResult Create(Product product)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if(product.ImageUpload != null)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
+                    string extension = Path.GetExtension(product.ImageUpload.FileName);
+                    filename = filename + extension;
+                    product.ProductImage = "~/Content/Image/logo/" + filename;
+                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/logo"), filename));
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: admin/Products/Edit/5
@@ -127,6 +138,12 @@ namespace Storeonline.Areas.admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult ChonHang()
+        {
+            ProductCategory hang = new ProductCategory();
+            hang.ProductCategories = db.ProductCategories.ToList<ProductCategory>();
+            return PartialView(hang);
         }
     }
 }

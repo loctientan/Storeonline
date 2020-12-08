@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html>
+@{
+    var user = Session["User"] as Storeonline.Models.User;
+}
 <style>
-    .login-signup{
-         
+    .login-signup {
     }
 </style>
 <html>
@@ -11,7 +13,7 @@
     <title>SMobile Premium</title>
     <!-- Favicon -->
     <link href="~/Content/Image/logo/logo.png" rel="icon">
- 
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -50,7 +52,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
                         <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
                         <a href="product-list.html" class="nav-item nav-link">Sản phẩm</a>
                         <a href="product-detail.html" class="nav-item nav-link">Chi tiết sản phẩm</a>
@@ -79,8 +80,8 @@
             </nav>
         </div>
     </div>
+
     <!-- Nav Bar End -->
-    
     <!-- Bottom Bar End -->
 
     <div class="container body-content">

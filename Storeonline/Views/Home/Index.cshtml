@@ -1,7 +1,6 @@
-﻿@model IEnumerable<Storeonline.Models.ProductCategory>
-@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model PagedList.IPagedList<Storeonline.Models.Product>
+@using PagedList.Mvc;
+@{ ViewBag.Title = "Home Page"; }
 
 <body>
     <!-- Main Slider Start -->
@@ -97,75 +96,33 @@
         </div>
     </div>
     <!-- Brand End -->
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParentID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShowOnHome)
-            </th>
-            <th></th>
-        </tr>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+<div class="card" style="width:16rem;margin:10px">
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParentID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShowOnHome)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-                </td>
-            </tr>
-        }
+    <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID})">
+        <div class="img">
+            <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
+        </div>
+    </a>
+    <div class="card-body">
+        <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID })">
+            <h3 class="card-title">@item.ProductName</h3>
+            <p class="card-text"> @item.Description</p>
 
-    </table>
+            <h4 style="color:red;font-size:larger;font-family:'Noto Serif'"> @item.Price.ToString("#,#00")đ</h4>
+        </a>
+        <br />
+
+    </div>
+
+</div>            }
+        </div>
+    </div>
+
+    <div class="col-sm-12" style="text-align:center;">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
 </body>

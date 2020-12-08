@@ -13,10 +13,11 @@ namespace Storeonline.Models
         public connectDB()
         {
             SqlConnectionStringBuilder sql = new SqlConnectionStringBuilder();
-            sql.DataSource = "THIENLAM\\SQLEXPRESS";
-            sql.InitialCatalog = "StoreOnline";
+            //sql.DataSource = "DESKTOP-H876HDS";
+            //sql.InitialCatalog = "StoreOnline";
             sql.IntegratedSecurity = true;
-            this.Database.Connection.ConnectionString = sql.ConnectionString;
+            //this.Database.Connection.ConnectionString = sql.ConnectionString;
+            this.Database.Connection.ConnectionString = "Data Source=SQL5050.site4now.net;Initial Catalog=DB_A69F59_slavvic;User Id=DB_A69F59_slavvic_admin;Password=Slavmaster123";
         }
 
         public virtual DbSet<Product> Products {get;set;}

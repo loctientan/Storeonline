@@ -72,10 +72,13 @@ namespace Storeonline.Models
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string ProductImage { get; set; }
 
+
         public Product()
         {
-            ProductImage = "";
+            ProductImage = "~/Content/Image/logo/add.png";
         }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
 
         [DisplayName("Giá sản phẩm")]
         [Required(ErrorMessage = "Vui lòng nhập")]
@@ -123,9 +126,6 @@ namespace Storeonline.Models
         [DisplayName("Lượt xem")]
         public int ViewCounts {get; set; }
 
-        [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
-
         public virtual ICollection<Invoice> Invoices { get; set; }
 
         public virtual ICollection<InvoiceDetails> InvoiceDetails { get; set; }
@@ -133,8 +133,8 @@ namespace Storeonline.Models
         public ProductCategory ProductCategorys { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
-
-
+        [NotMapped]
+        public HttpPostedFileBase ImageUploadPro { get; set; }
     }
 
     public class User

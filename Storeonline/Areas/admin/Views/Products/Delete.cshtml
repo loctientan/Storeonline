@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -48,7 +49,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductImage)
+            <img src="@Url.Content(Model.ProductImage)" style="height:150px; width:200px; margin:10px;" id="previewImage" />
         </dd>
 
         <dt>
@@ -149,7 +150,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
