@@ -1,0 +1,174 @@
+﻿@model Storeonline.Models.User
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            img {
+                display: block;
+                width: 670px;
+                height: 628px;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Container for flexboxes */
+            section {
+                margin-top: 50px;
+                margin-bottom: 50px;
+                display: flex;
+                width: 100%;
+            }
+
+            /* Style the navigation menu */
+            nav {
+                width: 60%;
+                background: #ccc;
+                height: 550px;
+            }
+
+                nav ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+
+            /* Style the content */
+            article {
+                width: 35%;
+                background-color: white;
+                padding: 10px;
+                padding-top: 10px;
+            }
+
+            .title-login {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .tieudelogin {
+                text-align: center;
+            }
+
+            .btn-login {
+                text-align: center;
+            }
+
+            h4 {
+                font-weight: bold;
+            }
+
+            button {
+                padding: 5px 20px;
+                border-radius: 20px;
+                -moz-border-radius: 20px;
+                -webkit-border-radius: 20px;
+                border: none;
+                background: #8AC007;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .btn-login {
+                text-align: center;
+            }
+
+            input {
+                padding: 5px 20px;
+                border-radius: 20px;
+            }
+
+            .font-login {
+                width: 100%;
+                height: 628px;
+            }
+
+            .resetorregister {
+                text-align: center;
+                font-size: 13px;
+            }
+
+            a {
+                color: #498ad0;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="font-login">
+            <nav>
+                    <img src="~/Content/Image/logo/imglogin.jpg" />
+            </nav>
+            <article>
+                <div class="tieudelogin">
+                    <h4 style="color:black">SIGN UP</h4><br>
+                </div>
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line __web-inspector-hide-shortcut__" data-val="true" id="LastName" name="LastName" type="text" value="" placeholder="Họ, tên đệm">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="form-control text-box single-line" data-val="true" id="FirstName" name="FirstName" type="text" value="" placeholder="Tên">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Address" name="Address" type="text" value="" placeholder="Địa chỉ">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input  class="input-validation-error form-control text-box single-line" data-val="true" id="Phone" name="Phone" type="number" value="" placeholder="Số điện thoại" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Email" name="Email" type="text" value="" placeholder="Email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Username" name="Username" type="text" value="" placeholder="Username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Password" name="Password" type="password" value="" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md">
+                        <input class="input-validation-error form-control text-box single-line" data-val="true" data-val-equalto="Password và Confirm Password phải giống nhau" data-val-equalto-other="*.Password" id="ConfirmPassword" name="ConfirmPassword" type="password" value="" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="resetorregister">
+                    <a href="@Url.Action("Login","Users")"> <ins>Return to login page</ins></a>
+                </div>
+                <br>
+                <div class="btn-login">
+                    <button>SIGN UP</button>
+                </div>
+            </article>
+        </section>
+    </body>
+</html>
+}
