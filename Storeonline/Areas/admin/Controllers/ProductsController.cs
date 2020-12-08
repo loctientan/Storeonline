@@ -40,7 +40,7 @@ namespace Storeonline.Areas.admin.Controllers
         // GET: admin/Products/Create
         public ActionResult Create()
         {
-          
+            ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name");
             return View();
         }
 
@@ -51,23 +51,24 @@ namespace Storeonline.Areas.admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Product product)
         {
+            product.CreateDate = DateTime.Now;
+            product.CreateBy = null;
+            product.ModifiedBy = null;
+            product.Quantity = 0;
+            product.TopHot = DateTime.Now;
+            product.ViewCounts = 0;
             try
             {
-              
                 if (product.ImageUpload != null)
                 {
                     string filename = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
                     string extension = Path.GetExtension(product.ImageUpload.FileName);
                     filename = filename + extension;
                     product.ProductImage = "~/Content/Image/Products/" + filename;
-                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/Products/"), filename));
-                   
+                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/Products/"), filename));                  
                 }
-                product.CreateDate = DateTime.Now.ToLocalTime();
-                product.ModifiedDate = DateTime.Now.ToLocalTime();
                 db.Products.Add(product);
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
             catch
@@ -75,7 +76,6 @@ namespace Storeonline.Areas.admin.Controllers
                 return View();
             }
         }
-  
 
         // GET: admin/Products/Edit/5
         public ActionResult Edit(int? id)
@@ -98,7 +98,7 @@ namespace Storeonline.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductCode,ProductName,Description,ProductImage,Price,PromotionPrice,Quantity,CategoryID,Detail,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,TopHot,ViewCounts")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductCode,ProductName,Description,ProductImage,Price,PromotionPrice,Quantity,CategoryID,Detail,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,ShowOnHome,TopHot,ViewCounts")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +135,12 @@ namespace Storeonline.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public ActionResult ChonHang()
+        {
+            ProductCategory hang = new ProductCategory();
+            hang.ProductCategories = db.ProductCategories.ToList<ProductCategory>();
+            return PartialView(hang);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -143,12 +148,6 @@ namespace Storeonline.Areas.admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult Thuonghieu()
-        {
-            ProductCategory productCategory = new ProductCategory();
-            productCategory.ProductCategories = db.ProductCategories.ToList<ProductCategory>();
-            return PartialView(productCategory);
         }
     }
 }

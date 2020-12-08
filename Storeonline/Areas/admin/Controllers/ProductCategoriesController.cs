@@ -46,10 +46,13 @@ namespace Storeonline.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,Name,Description,ParentID,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,ShowOnHome")] ProductCategory productCategory)
+        public ActionResult Create(ProductCategory productCategory)
         {
+            productCategory.CreateDate = DateTime.Now;
+            productCategory.ModifiedDate = DateTime.Now;
             if (ModelState.IsValid)
             {
+             
                 db.ProductCategories.Add(productCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,7 +117,7 @@ namespace Storeonline.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+     
         protected override void Dispose(bool disposing)
         {
             if (disposing)

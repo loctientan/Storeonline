@@ -149,13 +149,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012061337079_ad.cs" />
-    <Compile Include="Migrations\202012061337079_ad.designer.cs">
-      <DependentUpon>202012061337079_ad.cs</DependentUpon>
+    <Compile Include="Migrations\202012071540533_a.cs" />
+    <Compile Include="Migrations\202012071540533_a.designer.cs">
+      <DependentUpon>202012071540533_a.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\connectDB.cs" />
-    <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\storeonlineDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -271,7 +270,7 @@
     <Content Include="Areas\admin\Views\Products\Details.cshtml" />
     <Content Include="Areas\admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Products\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Products\Thuonghieu.cshtml" />
+    <Content Include="Areas\admin\Views\Products\ChonHang.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -394,8 +393,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012061337079_ad.resx">
-      <DependentUpon>202012061337079_ad.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012071540533_a.resx">
+      <DependentUpon>202012071540533_a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
