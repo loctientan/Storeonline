@@ -147,6 +147,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012081202297_stoa.cs" />
+    <Compile Include="Migrations\202012081202297_stoa.designer.cs">
+      <DependentUpon>202012081202297_stoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\connectDB.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\storeonlineDB.cs" />
@@ -284,6 +289,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012081202297_stoa.resx">
+      <DependentUpon>202012081202297_stoa.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

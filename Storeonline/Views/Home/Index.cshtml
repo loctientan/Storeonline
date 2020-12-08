@@ -2,23 +2,8 @@
 @using PagedList.Mvc;
 @{ ViewBag.Title = "Home Page"; }
 
-<style>
-    .searchname {
-        width: 200px;
-    }
-</style>
 <body>
     <!-- Main Slider Start -->
-    @using (Html.BeginForm("Index", "Home"))
-    {    
-        <div class="form-group row" style="padding: 6px 0px 0px 0px ">
-            <input type="text" class="col-sm-4" placeholder="Tìm kiếm..." aria-label="Tìm kiếm..." aria-describedby="basic-addon2" id="ten" name="ten" />
-            <input type="text" class="col-sm-4" placeholder="Tìm giá..." aria-lable="Tìm kiếm..." aria-describedby="basic-addon2" id="price" name="price" />
-            <input type="submit" value="Tìm" class="col-sm-2" />
-            <div class="input-group-append">
-            </div>
-        </div>
-    }
     <div class="header">
         <div class="container-fluid">
             <div class="row">
@@ -115,25 +100,25 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="card" style="width:16rem;margin:10px">
+<div class="card" style="width:16rem;margin:10px">
 
-                    <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID})">
-                        <div class="img">
-                            <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID })">
-                            <h3 class="card-title">@item.ProductName</h3>
-                            <p class="card-text"> @item.Description</p>
+    <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID})">
+        <div class="img">
+            <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
+        </div>
+    </a>
+    <div class="card-body">
+        <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID })">
+            <h3 class="card-title">@item.ProductName</h3>
+            <p class="card-text"> @item.Description</p>
 
-                            <h4 style="color:red;font-size:larger;font-family:'Noto Serif'"> @item.Price.ToString("#,#00")đ</h4>
-                        </a>
-                        <br />
+            <h4 style="color:red;font-size:larger;font-family:'Noto Serif'"> @item.Price.ToString("#,#00")đ</h4>
+        </a>
+        <br />
 
-                    </div>
+    </div>
 
-                </div>}
+</div>            }
         </div>
     </div>
 

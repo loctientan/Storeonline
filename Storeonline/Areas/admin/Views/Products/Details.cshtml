@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Details</h2>
@@ -48,7 +47,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductImage)
+            <img src="@Url.Content(Model.ProductImage)" style="height:150px; width:200px; margin:10px;" id="previewImage"/>
         </dd>
 
         <dt>
@@ -129,14 +128,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShowOnHome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShowOnHome)
         </dd>
 
         <dt>

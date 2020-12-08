@@ -12,6 +12,7 @@ namespace Storeonline.Models
     public class ProductCategory
     {
         [Key]
+        [DisplayName("Nhà sản xuất")]
         public int CategoryID { get; set; }
 
         [DisplayName("Nhà sản xuất")]
@@ -26,13 +27,13 @@ namespace Storeonline.Models
         public int ParentID { get; set; }
 
         [DisplayName("Thời gian tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [DisplayName("Được tạo bởi")]
         public string CreateBy { get; set; }
 
         [DisplayName("Thời gian sửa")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [DisplayName("Được sửa bởi")]
         public string ModifiedBy { get; set; }
@@ -42,6 +43,11 @@ namespace Storeonline.Models
 
         [DisplayName("Hiển thị tại trang chủ")]
         public bool ShowOnHome { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
+        
+        [NotMapped]
+        public List<ProductCategory> ProductCategories { get; set; }
 
     }
 
@@ -62,14 +68,17 @@ namespace Storeonline.Models
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string Description { get; set; }
 
-        [DisplayName("Mã sản phẩm")]
+        [DisplayName("Ảnh sản phẩm")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string ProductImage { get; set; }
 
+
         public Product()
         {
-            ProductImage = "";
+            ProductImage = "~/Content/Image/logo/add.png";
         }
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
 
         [DisplayName("Giá sản phẩm")]
         [Required(ErrorMessage = "Vui lòng nhập")]
@@ -97,13 +106,13 @@ namespace Storeonline.Models
         public int Warranty { get; set; }
 
         [DisplayName("Thời gian tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [DisplayName("Được tạo bởi")]
         public string CreateBy { get; set; }
 
         [DisplayName("Thời gian sửa")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [DisplayName("Được sửa bởi")]
         public string ModifiedBy { get; set; }
@@ -117,7 +126,15 @@ namespace Storeonline.Models
         [DisplayName("Lượt xem")]
         public int ViewCounts {get; set; }
 
+        public virtual ICollection<Invoice> Invoices { get; set; }
 
+        public virtual ICollection<InvoiceDetails> InvoiceDetails { get; set; }
+
+        public ProductCategory ProductCategorys { get; set; }
+
+        public virtual ICollection<Cart> Carts { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageUploadPro { get; set; }
     }
 
     public class User
@@ -168,8 +185,17 @@ namespace Storeonline.Models
         //[Required(ErrorMessage = "Vui lòng nhập")]
         public string Position { get; set; }
 
+        [DisplayName("Khách hàng không tạo account")]
+        public Boolean CustomerNotAccount { get; set; }
 
-        [ForeignKey("Role")] public int? IdRole { get; set; }
+        [ForeignKey("Role")] public int? RoleID { get; set; }
+        
+        [NotMapped]
+        public string LoginError { get; set; }
+
+        public Role Role { get; set; }
+
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 
     public class Role
@@ -185,6 +211,7 @@ namespace Storeonline.Models
         [Required(ErrorMessage = "Vui lòng nhập")]
         public string Details { get; set; }
 
+        public virtual ICollection<User> Users { get; set; }
     }
 
     public class Cart
@@ -193,7 +220,7 @@ namespace Storeonline.Models
         public int CartID { get; set; }
 
         [ForeignKey("User")] public int? UserID { get; set; }
-        [ForeignKey("Dienthoai")] public int? ProductID { get; set; }
+        [ForeignKey("Product")] public int? ProductID { get; set; }
 
         [DisplayName("Ngày mua")]
         [Required(ErrorMessage = "Vui lòng nhập")]
@@ -256,6 +283,8 @@ namespace Storeonline.Models
         [DisplayName("Mã khách hàng")]
         public string UserCode { get; set; }
 
+        public virtual ICollection<InvoiceDetails> InvoiceDetails { get; set; }
+
 
     }
 
@@ -285,6 +314,9 @@ namespace Storeonline.Models
 
         [DisplayName("Số lượng")]
         public int Quantity { get; set; }
+
+        public Invoice Invoice { get; set; }
+        public Product Product { get; set; }
     }
 
     public class NewsCategory
@@ -304,13 +336,13 @@ namespace Storeonline.Models
         public string Description { get; set; }
 
         [DisplayName("Thời gian tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [DisplayName("Được tạo bởi")]
         public string CreateBy { get; set; }
 
         [DisplayName("Thời gian sửa")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [DisplayName("Được sửa bởi")]
         public string ModifiedBy { get; set; }
@@ -321,6 +353,10 @@ namespace Storeonline.Models
         [DisplayName("Hiển thị trên trang chủ")]
         public bool TopHot { get; set; }
 
+        public virtual ICollection<News> News { get; set; }
+
+        [NotMapped]
+        public List<NewsCategory> NewsCategories { get; set; }
 
     }
 
@@ -352,13 +388,13 @@ namespace Storeonline.Models
         public string Details { get; set; }
 
         [DisplayName("Thời gian tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [DisplayName("Được tạo bởi")]
         public string CreateBy { get; set; }
 
         [DisplayName("Thời gian sửa")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [DisplayName("Được sửa bởi")]
         public string ModifiedBy { get; set; }
@@ -371,6 +407,12 @@ namespace Storeonline.Models
 
         [DisplayName("Lượt xem")]
         public int ViewCount { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+        public NewsCategory NewsCategory { get; set; }
+
     }
 
     public class Feedback
@@ -378,8 +420,11 @@ namespace Storeonline.Models
         [Key]
         public int FeedbackID { get; set; }
 
+        [DisplayName("Mã Feedback")]
+        public string FeedbackCode { get; set; }
+
         [DisplayName("Tên khách hàng")]
-        //[Required(ErrorMessage = "Vui lòng nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập")]
         public string FirstName { get; set; }
 
         [DisplayName("Địa chỉ")]
@@ -402,6 +447,22 @@ namespace Storeonline.Models
         public bool Status { get; set; }
 
         [DisplayName("Thời gian tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
     }
+
+    public class OrderStatusCategory
+    {
+        [Key]
+        public int orderstatuscategoryID { get; set; }
+
+        [DisplayName("Trạng thái đơn hàng")]
+        public string orderstatus { get; set; }
+
+        public virtual ICollection<InvoiceDetails> InvoiceDetails { get; set; }
+
+        [NotMapped]
+        public List<OrderStatusCategory> OrderStatusCategories { get; set; }
+    }
+
+
 }

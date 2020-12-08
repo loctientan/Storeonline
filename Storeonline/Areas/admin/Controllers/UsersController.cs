@@ -14,6 +14,48 @@ namespace Storeonline.Areas.admin.Controllers
     {
         private connectDB db = new connectDB();
 
+        public ActionResult Login(User _user)
+        {
+            var check = db.Users.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password)).FirstOrDefault();
+            if (check == null)
+            {
+                //ViewBag.error = "";
+                return View("Login", _user);
+            }
+            else
+            {
+                var test = db.Users.FirstOrDefault(s => s.Username == _user.Username);
+                if (test.Username != "admin")// khong phai admin
+                {
+                    Session["Username"] = check.Username;
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                else//neu la admin
+                {
+                    return RedirectToAction("Index", "Products");
+                }
+            }
+        }
+        public ActionResult Signup(User _user)
+        {
+            if (ModelState.IsValid)
+            {
+                var check = db.Users.FirstOrDefault(s => s.Username == _user.Username);
+                if (check == null)
+                {
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.Users.Add(_user);
+                    db.SaveChanges();
+                    return RedirectToAction("Login", "Users");
+                }
+                else
+                {
+                    ViewBag.error = "Tài khoản đã có người sử dụng";
+                    return View();
+                }
+            }
+            return View();
+        }           
         // GET: admin/Users
         public ActionResult Index()
         {
