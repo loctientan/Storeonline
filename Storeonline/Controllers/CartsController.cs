@@ -79,13 +79,15 @@ namespace Storeonline.Areas.admin.Controllers
 
         public ActionResult Pay(FormCollection form)
         {
-            try
+            User user = new User();
+            if(user.Username == null)
             {
+                user.CustomerNotAccount = true;
                 FunctionCart functionCart = Session["FunctionCart"] as FunctionCart;
                 Invoice invoice = new Invoice();
                 PaymentCategory paymentCategory = new PaymentCategory();
                 invoice.CreateDate = DateTime.Now;
-                User user = Session["Username"] as User;
+                //User user = Session["Username"] as User;
                 invoice.UserID = user.UserID;
                 invoice.UserCode = user.UserCode;
                 invoice.Email = form["email"];
@@ -117,8 +119,46 @@ namespace Storeonline.Areas.admin.Controllers
                 SetAlert("Bộ phận bán hàng sẽ liên hệ bạn trong vòng 12h tới. Xin cảm ơn bạn đã mua hàng.", "success");
                 return RedirectToAction("Details", "InvoiceDetails");
             }
-            catch
+            else if(user.Username != null)
             {
+                FunctionCart functionCart = Session["FunctionCart"] as FunctionCart;
+                Invoice invoice = new Invoice();
+                PaymentCategory paymentCategory = new PaymentCategory();
+                invoice.CreateDate = DateTime.Now;
+                user = Session["Username"] as User;
+                invoice.UserID = user.UserID;
+                invoice.UserCode = user.UserCode;
+                invoice.Email = user.Email;
+                invoice.LastName = user.LastName;
+                invoice.FirstName = user.FirstName;
+                invoice.Phone = user.Phone;
+                invoice.Address = user.Address;
+                invoice.ghichu = form["ghichu"];
+                //invoice.Payment = paymentCategory.paymentcategoryID;
+                //invoice.PaymentCategory.paymentstatus = form.AllKeys.Single();
+                db.Invoices.Add(invoice);
+
+                foreach (var item in functionCart.carts)
+                {
+                    InvoiceDetails invoiceDetails = new InvoiceDetails();
+
+                    invoiceDetails.InvoiceID = invoice.InvoiceID;
+                    invoiceDetails.UserCode = invoice.UserCode;
+                    invoiceDetails.ProductID = item.Product.ProductID;
+                    invoiceDetails.ProductName = item.Product.ProductName;
+                    invoiceDetails.Price = item.Product.Price;
+                    invoiceDetails.PromotionPrice = item.Product.PromotionPrice;
+                    invoiceDetails.Quantity = item.Quantity;
+                    db.InvoiceDetails.Add(invoiceDetails);
+                }
+
+                db.SaveChanges();
+                functionCart.RemoveCartAll();
+                SetAlert("Bộ phận bán hàng sẽ liên hệ bạn trong vòng 12h tới. Xin cảm ơn bạn đã mua hàng.", "success");
+                return RedirectToAction("Details", "InvoiceDetails");
+            }
+            else
+            { 
                 SetAlert("Đặt hàng không thành công. Vui lòng đặt lại.", "danger");
                 return RedirectToAction("ViewCart", "Carts");
             }
@@ -145,5 +185,51 @@ namespace Storeonline.Areas.admin.Controllers
                 TempData["AlertType"] = "alert-info";
             }
         }
+
+
+        
+//             try
+//            {
+//                FunctionCart functionCart = Session["FunctionCart"] as FunctionCart;
+//        Invoice invoice = new Invoice();
+//        PaymentCategory paymentCategory = new PaymentCategory();
+//        invoice.CreateDate = DateTime.Now;
+//                User user = Session["Username"] as User;
+//        invoice.UserID = user.UserID;
+//                invoice.UserCode = user.UserCode;
+//                invoice.Email = form["email"];
+//                invoice.LastName = form["lastname"];
+//                invoice.FirstName = form["firstname"];
+//                invoice.Phone = form["phone"];
+//                invoice.Address = form["address"];
+//                invoice.ghichu = form["ghichu"];
+//                //invoice.Payment = paymentCategory.paymentcategoryID;
+//                //invoice.PaymentCategory.paymentstatus = form.AllKeys.Single();
+//                db.Invoices.Add(invoice);
+
+//                foreach (var item in functionCart.carts)
+//                {
+//                    InvoiceDetails invoiceDetails = new InvoiceDetails();
+
+//        invoiceDetails.InvoiceID = invoice.InvoiceID;
+//                    invoiceDetails.UserCode = invoice.UserCode;
+//                    invoiceDetails.ProductID = item.Product.ProductID;
+//                    invoiceDetails.ProductName = item.Product.ProductName;
+//                    invoiceDetails.Price = item.Product.Price;
+//                    invoiceDetails.PromotionPrice = item.Product.PromotionPrice;
+//                    invoiceDetails.Quantity = item.Quantity;
+//                    db.InvoiceDetails.Add(invoiceDetails);
+//                }
+
+//    db.SaveChanges();
+//                functionCart.RemoveCartAll();
+//                SetAlert("Bộ phận bán hàng sẽ liên hệ bạn trong vòng 12h tới. Xin cảm ơn bạn đã mua hàng.", "success");
+//                return RedirectToAction("Details", "InvoiceDetails");
+//}
+//            catch
+//{
+//    SetAlert("Đặt hàng không thành công. Vui lòng đặt lại.", "danger");
+//    return RedirectToAction("ViewCart", "Carts");
+//}
     }
 }

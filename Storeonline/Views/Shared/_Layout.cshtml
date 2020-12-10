@@ -46,19 +46,22 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-                        <a href="product-list.html" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="product-detail.html" class="nav-item nav-link">Chi tiết sản phẩm</a>
-                        <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
-                        <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
-                        <a href="my-account.html" class="nav-item nav-link">Tài khoản</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nhà cung cấp</a>
+                        <a href="@Url.Action("Index","Home")" class="nav-item nav-link active" style="color:black; font-weight:bold">Trang chủ</a>
+                        <div class="nav-item dropdown" style="color:black; font-weight:bold">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="color:black; font-weight:bold">Nhà cung cấp</a>
                             <div class="dropdown-menu">
-                                <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="contact.html" class="dropdown-item">Thông tin liên hệ</a>
+                                <a href="#" class="dropdown-item">IPHONE</a>
+                                <a href="#" class="dropdown-item">SAMSUNG</a>
+                                <a href="#" class="dropdown-item">OPPO</a>
+                                <a href="#" class="dropdown-item">XIAOMI</a>
+                                <a href="#" class="dropdown-item">VSMART</a>
                             </div>
                         </div>
+                        <a href="#" class="nav-item nav-link" style="color:black; font-weight:bold">Công nghệ</a>
+                        <a href="#" class="nav-item nav-link" style="color:black; font-weight:bold">Giới thiệu</a>
+                        <a href="#" class="nav-item nav-link" style="color:black; font-weight:bold">Liên hệ</a>
+
+
                     </div>
                     <div class="navbar-nav ml-auto">
 
@@ -66,7 +69,7 @@
                         {
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#">Xin chào @Session["Username"].ToString() </a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Xin chào @Session["Username"].ToString() </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/Customer/Details/@Session["userID"]">Tài khoản</a>
                                     <a class="dropdown-item" href="@Url.Action("ViewCart", "Carts")">Giỏ hàng</a>
@@ -77,52 +80,18 @@
                         }
                         else
                         {
-                            <li class="nav-item">
+                            <li class="nav-item" style="color:black; font-weight:bold">
                                 <a href="@Url.Action("Login","Customer")">Đăng nhập</a>
                             </li>
-                        }                      
+                        }
                     </div>
                 </div>
             </nav>
         </div>
     </div>
     <!-- Nav Bar End -->
-    <!-- Bottom Bar Start -->
-    <div class="bottom-bar">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="~/Content/Image/logo/logo.png" /> 
-                            Smobile Premium
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="search">
-                        <input type="text" placeholder="Search">
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user">
-                        <a href="wishlist.html" class="btn wishlist">
-                            <i class="fa fa-heart"></i>
-                            <span>(0)</span>
-                        </a>
-                        <a href="cart.html" class="btn cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>(0)</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bottom Bar End -->
-
-    <div class="container body-content">
+   
+    <div class="body-content">
         @RenderBody()
     </div>
 

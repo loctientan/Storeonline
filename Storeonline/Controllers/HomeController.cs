@@ -14,7 +14,7 @@ namespace Storeonline.Controllers
     {
         private connectDB db = new connectDB();
         // GET: Home
-        public ActionResult Index(string id, int? page)
+        public ActionResult Index(string id, int? page, string ten, string price)
         {
             int pageSize = 8;
             int pageNumber = (page ?? 1);
@@ -31,6 +31,16 @@ namespace Storeonline.Controllers
                               select r).OrderBy(x => x.ProductID);
                 return View(result.ToPagedList(pageNumber, pageSize));
             }
+
+            if (!String.IsNullOrEmpty(ten) || !String.IsNullOrEmpty(price))
+            {
+                var result = (from r in db.Products
+                              where r.ProductName.Contains(ten)
+                              && r.Price.ToString().Contains(price)
+                              select r).OrderBy(a => a.ProductID);
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+
             var links = (from l in db.Products
                          select l).OrderBy(x => x.ProductID);
 

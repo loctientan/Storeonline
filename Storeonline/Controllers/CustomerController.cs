@@ -44,6 +44,7 @@ namespace Storeonline.Controllers
                 else if(us!=null && us.IsStaff == true)
                 {
                     Session["Username"] = us;
+                    Session["UserID"] = us.UserID;
                     Session["Username"] = us.Username.ToString();
                
                     return RedirectToAction("Index", "Products", new { Area = "admin" });
