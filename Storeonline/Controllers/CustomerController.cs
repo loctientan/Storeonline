@@ -6,15 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Storeonline.Models;
 
-namespace Storeonline.Areas.admin.Controllers
+namespace Storeonline.Controllers
 {
-    public class UsersController : Controller
+    public class CustomerController : Controller
     {
         private connectDB db = new connectDB();
-
 
         public ActionResult Login(User _user)
         {
@@ -30,11 +28,12 @@ namespace Storeonline.Areas.admin.Controllers
                 if (test.Username != "admin")// khong phai admin
                 {
                     Session.Add("Username", check.Username);
-                    return RedirectToAction("Index", "Home", new { area = "" });
+                    return RedirectToAction("Index", "Home");
                 }
                 else//neu la admin
                 {
-                    return RedirectToAction("Index", "Products");
+              
+                    return RedirectToAction("Index", "Products", new { area = "admin" });
                 }
             }
 
@@ -56,7 +55,7 @@ namespace Storeonline.Areas.admin.Controllers
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.Users.Add(_user);
                     db.SaveChanges();
-                    return RedirectToAction("Login", "Users");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

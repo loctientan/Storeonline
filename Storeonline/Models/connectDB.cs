@@ -30,5 +30,6 @@ namespace Storeonline.Models
         public virtual DbSet<InvoiceDetails> InvoiceDetails { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
 
+        public System.Data.Entity.DbSet<Storeonline.Models.PaymentCategory> PaymentCategories { get; set; }
     }
 }

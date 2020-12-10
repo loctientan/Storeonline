@@ -1,0 +1,4 @@
+﻿
+
+@model  Storeonline.Models.PaymentCategory
+@Html.DropDownListFor(m => m.paymentstatus, new SelectList(Model.PaymentCategories,"Hình thức thanh toán","Name","--Chọn--"))

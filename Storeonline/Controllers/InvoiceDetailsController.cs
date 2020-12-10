@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Storeonline.Models;
 
-namespace Storeonline.Areas.admin.Controllers
+namespace Storeonline.Controllers
 {
     public class InvoiceDetailsController : Controller
     {
@@ -28,12 +28,14 @@ namespace Storeonline.Areas.admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InvoiceDetails invoiceDetails = db.InvoiceDetails.Find(id);
-            if (invoiceDetails == null)
+            Invoice model = db.Invoices.SingleOrDefault(n =>n.InvoiceID == id);
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(invoiceDetails);
+            var listproductdetails = db.InvoiceDetails.Where(s => s.InvoiceID == id);
+            ViewBag.Listproductdetails = listproductdetails;
+            return View(model);
         }
 
         // GET: admin/InvoiceDetails/Create

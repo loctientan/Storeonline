@@ -136,10 +136,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
-    <Compile Include="Areas\admin\Controllers\CartsController.cs" />
+    <Compile Include="Areas\admin\Controllers\PaymentCategoriesController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Areas\admin\Controllers\FeedbacksController.cs" />
-    <Compile Include="Areas\admin\Controllers\InvoiceDetailsController.cs" />
-    <Compile Include="Areas\admin\Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\InvoiceDetailsController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Areas\admin\Controllers\NewsCategoriesController.cs" />
     <Compile Include="Areas\admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\admin\Controllers\ProductCategoriesController.cs" />
@@ -152,6 +154,14 @@
     <Compile Include="Migrations\202012071540533_a.cs" />
     <Compile Include="Migrations\202012071540533_a.designer.cs">
       <DependentUpon>202012071540533_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012080803322_upda.cs" />
+    <Compile Include="Migrations\202012080803322_upda.designer.cs">
+      <DependentUpon>202012080803322_upda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012080837016_update.cs" />
+    <Compile Include="Migrations\202012080837016_update.designer.cs">
+      <DependentUpon>202012080837016_update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\connectDB.cs" />
@@ -217,21 +227,21 @@
     <Content Include="Areas\admin\Views\News\Details.cshtml" />
     <Content Include="Areas\admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\admin\Views\News\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Carts\Create.cshtml" />
-    <Content Include="Areas\admin\Views\Carts\Delete.cshtml" />
-    <Content Include="Areas\admin\Views\Carts\Details.cshtml" />
-    <Content Include="Areas\admin\Views\Carts\Edit.cshtml" />
-    <Content Include="Areas\admin\Views\Carts\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Invoices\Create.cshtml" />
-    <Content Include="Areas\admin\Views\Invoices\Delete.cshtml" />
-    <Content Include="Areas\admin\Views\Invoices\Details.cshtml" />
-    <Content Include="Areas\admin\Views\Invoices\Edit.cshtml" />
-    <Content Include="Areas\admin\Views\Invoices\Index.cshtml" />
-    <Content Include="Areas\admin\Views\InvoiceDetails\Create.cshtml" />
-    <Content Include="Areas\admin\Views\InvoiceDetails\Delete.cshtml" />
-    <Content Include="Areas\admin\Views\InvoiceDetails\Details.cshtml" />
-    <Content Include="Areas\admin\Views\InvoiceDetails\Edit.cshtml" />
-    <Content Include="Areas\admin\Views\InvoiceDetails\Index.cshtml" />
+    <Content Include="Views\Carts\Create.cshtml" />
+    <Content Include="Views\Carts\Delete.cshtml" />
+    <Content Include="Views\Carts\Details.cshtml" />
+    <Content Include="Views\Carts\Edit.cshtml" />
+    <Content Include="Views\Carts\Index.cshtml" />
+    <Content Include="Views\Invoices\Create.cshtml" />
+    <Content Include="Views\Invoices\Delete.cshtml" />
+    <Content Include="Views\Invoices\Details.cshtml" />
+    <Content Include="Views\Invoices\Edit.cshtml" />
+    <Content Include="Views\Invoices\Index.cshtml" />
+    <Content Include="Views\InvoiceDetails\Create.cshtml" />
+    <Content Include="Views\InvoiceDetails\Delete.cshtml" />
+    <Content Include="Views\InvoiceDetails\Details.cshtml" />
+    <Content Include="Views\InvoiceDetails\Edit.cshtml" />
+    <Content Include="Views\InvoiceDetails\Index.cshtml" />
     <Content Include="Areas\admin\Views\Feedbacks\Create.cshtml" />
     <Content Include="Areas\admin\Views\Feedbacks\Delete.cshtml" />
     <Content Include="Areas\admin\Views\Feedbacks\Details.cshtml" />
@@ -271,6 +281,13 @@
     <Content Include="Areas\admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Products\Index.cshtml" />
     <Content Include="Areas\admin\Views\Products\ChonHang.cshtml" />
+    <Content Include="Areas\admin\Views\PaymentCategories\Create.cshtml" />
+    <Content Include="Areas\admin\Views\PaymentCategories\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\PaymentCategories\Details.cshtml" />
+    <Content Include="Areas\admin\Views\PaymentCategories\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\PaymentCategories\Index.cshtml" />
+    <Content Include="Views\Invoices\PaymentCategory.cshtml" />
+    <Content Include="Areas\admin\Views\Users\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -376,6 +393,14 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DetailProducts.cshtml" />
+    <Content Include="Views\Carts\ViewCart.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Signup.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,6 +420,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202012071540533_a.resx">
       <DependentUpon>202012071540533_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012080803322_upda.resx">
+      <DependentUpon>202012080803322_upda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012080837016_update.resx">
+      <DependentUpon>202012080837016_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

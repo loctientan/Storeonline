@@ -56,19 +56,31 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nhà cung cấp</a>
                             <div class="dropdown-menu">
                                 <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="login.html" class="dropdown-item">Đăng nhập/Đăng ký</a>
                                 <a href="contact.html" class="dropdown-item">Thông tin liên hệ</a>
                             </div>
                         </div>
                     </div>
                     <div class="navbar-nav ml-auto">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
-                            </div>
-                        </div>
+
+                        @if (Session["Username"] != null)
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#">Xin chào @Session["Username"].ToString() </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Customer/Details/@Session["userID"]">Tài khoản</a>
+                                    <a class="dropdown-item" href="@Url.Action("ViewCart", "Carts")">Giỏ hàng</a>
+                                    <a class="dropdown-item" href="/Customer/Hoadons/Lichsudonhang/@Session["userID"]">Lịch sử Đơn hàng</a>
+                                    <a class="dropdown-item" href="@Url.Action("LogOut", "Customer")">Đăng xuất</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Login","Customer")">Đăng nhập</a>
+                            </li>
+                        }                      
                     </div>
                 </div>
             </nav>

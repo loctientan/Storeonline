@@ -10,107 +10,107 @@ using Storeonline.Models;
 
 namespace Storeonline.Areas.admin.Controllers
 {
-    public class InvoicesController : Controller
+    public class PaymentCategoriesController : Controller
     {
         private connectDB db = new connectDB();
 
-        // GET: admin/Invoices
+        // GET: admin/PaymentCategories
         public ActionResult Index()
         {
-            return View(db.Invoices.ToList());
+            return View(db.PaymentCategories.ToList());
         }
 
-        // GET: admin/Invoices/Details/5
+        // GET: admin/PaymentCategories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice invoice = db.Invoices.Find(id);
-            if (invoice == null)
+            PaymentCategory paymentCategory = db.PaymentCategories.Find(id);
+            if (paymentCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(invoice);
+            return View(paymentCategory);
         }
 
-        // GET: admin/Invoices/Create
+        // GET: admin/PaymentCategories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: admin/Invoices/Create
+        // POST: admin/PaymentCategories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InvoiceID,InvoiceCode,CreateDate,Email,LastName,FirstName,Phone,Address,ghichu,Payment,UserID,UserCode")] Invoice invoice)
+        public ActionResult Create([Bind(Include = "paymentcategoryID,paymentstatus")] PaymentCategory paymentCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Invoices.Add(invoice);
+                db.PaymentCategories.Add(paymentCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(invoice);
+            return View(paymentCategory);
         }
 
-        // GET: admin/Invoices/Edit/5
+        // GET: admin/PaymentCategories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice invoice = db.Invoices.Find(id);
-            if (invoice == null)
+            PaymentCategory paymentCategory = db.PaymentCategories.Find(id);
+            if (paymentCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(invoice);
+            return View(paymentCategory);
         }
 
-        // POST: admin/Invoices/Edit/5
+        // POST: admin/PaymentCategories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InvoiceID,InvoiceCode,CreateDate,Email,LastName,FirstName,Phone,Address,ghichu,Payment,UserID,UserCode")] Invoice invoice)
+        public ActionResult Edit([Bind(Include = "paymentcategoryID,paymentstatus")] PaymentCategory paymentCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(invoice).State = EntityState.Modified;
+                db.Entry(paymentCategory).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(invoice);
+            return View(paymentCategory);
         }
 
-        // GET: admin/Invoices/Delete/5
+        // GET: admin/PaymentCategories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Invoice invoice = db.Invoices.Find(id);
-            if (invoice == null)
+            PaymentCategory paymentCategory = db.PaymentCategories.Find(id);
+            if (paymentCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(invoice);
+            return View(paymentCategory);
         }
 
-        // POST: admin/Invoices/Delete/5
+        // POST: admin/PaymentCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Invoice invoice = db.Invoices.Find(id);
-            db.Invoices.Remove(invoice);
+            PaymentCategory paymentCategory = db.PaymentCategories.Find(id);
+            db.PaymentCategories.Remove(paymentCategory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
