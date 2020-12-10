@@ -52,33 +52,50 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-                        <a href="product-list.html" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="product-detail.html" class="nav-item nav-link">Chi tiết sản phẩm</a>
-                        <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
-                        <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
-                        <a href="my-account.html" class="nav-item nav-link">Tài khoản</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nhà cung cấp</a>
-                            <div class="dropdown-menu">
-                                <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="login.html" class="dropdown-item">Đăng nhập/Đăng ký</a>
-                                <a href="contact.html" class="dropdown-item">Thông tin liên hệ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="login-signup">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                            <div class="dropdown-menu">
-                                <a href="~/admin/Users/Login" class="dropdown-item">Login</a>
-                                <a href="~/admin/Users/Signup" class="dropdown-item">Register</a>
-                            </div>
+                    <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
+                    <a href="product-list.html" class="nav-item nav-link">Sản phẩm</a>
+                    <a href="product-detail.html" class="nav-item nav-link">Chi tiết sản phẩm</a>
+                    <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
+                    <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
+                    <a href="my-account.html" class="nav-item nav-link">Tài khoản</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Nhà cung cấp</a>
+                        <div class="dropdown-menu">
+                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+                            <a href="login.html" class="dropdown-item">Đăng nhập/Đăng ký</a>
+                            <a href="contact.html" class="dropdown-item">Thông tin liên hệ</a>
                         </div>
                     </div>
                 </div>
-            </nav>
+                <div class="login-signup">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                        <div class="dropdown-menu">
+                            @if (Session["Username"] == null)
+                            {
+                                <a href="~/admin/Users/Login" class="dropdown-item">Login</a>
+                                <a href="~/admin/Users/Signup" class="dropdown-item">Register</a>
+                            }
+                            else if (Session["Username"] != null)
+                            {
+
+                                <a href="@Url.Action("LogOut","Users")" class="dropdown-item">Logout</a>
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
         </div>
+        <div>    
+            <ul>Welcome @Session["Username"]</ul>
+           
+        </div>
+        </nav>
+    </div>
+    </div>
     </div>
 
     <!-- Nav Bar End -->

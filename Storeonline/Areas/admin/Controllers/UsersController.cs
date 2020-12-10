@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Storeonline.Models;
 
 namespace Storeonline.Areas.admin.Controllers
@@ -27,7 +28,7 @@ namespace Storeonline.Areas.admin.Controllers
                 var test = db.Users.FirstOrDefault(s => s.Username == _user.Username);
                 if (test.Username != "admin")// khong phai admin
                 {
-                    Session["Username"] = check.Username;
+                    Session.Add("Username", check.Username);
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else//neu la admin
@@ -35,6 +36,14 @@ namespace Storeonline.Areas.admin.Controllers
                     return RedirectToAction("Index", "Products");
                 }
             }
+
+        }
+        public ActionResult LogOut()
+        {
+            //FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            Session.Clear();
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
         public ActionResult Signup(User _user)
         {
