@@ -19,10 +19,10 @@ namespace Storeonline.Areas.admin.Controllers
         public ActionResult Login(User _user)
         {
             var check = db.Users.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password)).FirstOrDefault();
-            if (check == null)
+            if (ModelState.IsValid)
             {
-                //ViewBag.error = "";
-                return View("Login", _user);
+                SetAlert("Bạn vui lòng điền thông tin đăng nhập", "danger");
+                return View("Login");
             }
             else
             {
@@ -179,6 +179,27 @@ namespace Storeonline.Areas.admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        //Đặt thông báo lỗi
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "danger")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
+            else
+            {
+                TempData["AlertType"] = "alert-info";
+            }
         }
     }
 }

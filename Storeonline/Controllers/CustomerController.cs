@@ -16,33 +16,59 @@ namespace Storeonline.Controllers
 
         public ActionResult Login(User _user)
         {
-            var check = db.Users.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password)).FirstOrDefault();
-            if (check == null)
+          
+            if (ModelState.IsValid)
             {
-                //ViewBag.error = "";
-                return View("Login", _user);
+                SetAlert("Bạn vui lòng điền thông tin đăng nhập", "danger");
+                return View("Login");
             }
             else
             {
-                var test = db.Users.FirstOrDefault(s => s.Username == _user.Username);
-                if (test.Username != "admin")// khong phai admin
+                User us = db.Users
+                   .Where(u => u.Username.Equals(_user.Username) && u.Password.Equals(_user.Password)).FirstOrDefault();
+
+                User NoUsername = db.Users
+                 .Where(u => u.Password.Equals(_user.Password)).FirstOrDefault();
+
+                User NoPass = db.Users
+                 .Where(u => u.Username.Equals(_user.Username)).FirstOrDefault();
+
+                if(us != null && us.IsStaff == false)
                 {
-                    Session.Add("Username", check.Username);
+                    Session["Username"] = us;
+                    Session["UserID"] = us.UserID;
+                    Session["Username"] = us.Username.ToString();
+
                     return RedirectToAction("Index", "Home");
                 }
-                else//neu la admin
+                else if(us!=null && us.IsStaff == true)
                 {
-              
-                    return RedirectToAction("Index", "Products", new { area = "admin" });
+                    Session["Username"] = us;
+                    Session["Username"] = us.Username.ToString();
+               
+                    return RedirectToAction("Index", "Products", new { Area = "admin" });
+                }
+                else if (NoUsername != null)
+                {
+                    SetAlert("Username của bạn không đúng", "danger");
+                    return View("Login");
+                }
+                else if (NoPass != null)
+                {
+                    SetAlert("Password của bạn không đúng", "danger");
+                    return View("Login");
+                }
+                else
+                {
+                    return View("Login");
                 }
             }
 
         }
         public ActionResult LogOut()
         {
-            //FormsAuthentication.SignOut();
-            Session.Abandon(); // it will clear the session at the end of request
-            Session.Clear();
+            Session.Remove("Username");
+            Session.Remove("Carts");
             return RedirectToAction("Index", "Home", new { area = "" });
         }
         public ActionResult Signup(User _user)
@@ -65,119 +91,28 @@ namespace Storeonline.Controllers
             }
             return View();
         }
-        // GET: admin/Users
-        public ActionResult Index()
+        //Đặt thông báo lỗi
+        protected void SetAlert(string message, string type)
         {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
-        }
-
-        // GET: admin/Users/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            TempData["AlertMessage"] = message;
+            if (type == "success")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["AlertType"] = "alert-success";
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            else if (type == "warning")
             {
-                return HttpNotFound();
+                TempData["AlertType"] = "alert-warning";
             }
-            return View(user);
-        }
-
-        // GET: admin/Users/Create
-        public ActionResult Create()
-        {
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
-            return View();
-        }
-
-        // POST: admin/Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserCode,LastName,FirstName,Address,Phone,Email,Username,Password,ConfirmPassword,IsStaff,Position,RoleID")] User user)
-        {
-            if (ModelState.IsValid)
+            else if (type == "danger")
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["AlertType"] = "alert-danger";
             }
-
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
-        }
-
-        // GET: admin/Users/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["AlertType"] = "alert-info";
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
         }
-
-        // POST: admin/Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserCode,LastName,FirstName,Address,Phone,Email,Username,Password,ConfirmPassword,IsStaff,Position,RoleID")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            return View(user);
-        }
-
-        // GET: admin/Users/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: admin/Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+  
+      
     }
 }
