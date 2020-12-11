@@ -185,6 +185,7 @@
     <Content Include="Content\Image\carousel\iphone.png" />
     <Content Include="Content\Image\carousel\oppo.png" />
     <Content Include="Content\Image\carousel\samsung.png" />
+    <Content Include="Content\Image\logo\iphonelogin.jpg" />
     <Content Include="Content\Image\Products\phonedemo.png" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\lib\easing\easing.js" />
