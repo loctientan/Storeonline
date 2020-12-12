@@ -13,10 +13,17 @@ namespace Storeonline.Models
         public connectDB()
         {
             SqlConnectionStringBuilder sql = new SqlConnectionStringBuilder();
+<<<<<<< HEAD
             //sql.DataSource = "TANLOC";
             //sql.InitialCatalog = "StoreOnline";
             sql.IntegratedSecurity = true;
             //this.Database.Connection.ConnectionString = sql.ConnectionString;
+=======
+            sql.DataSource = "THIENLAM\\SQLEXPRESS";
+            sql.InitialCatalog = "StoreOnline";
+            sql.IntegratedSecurity = true;
+            this.Database.Connection.ConnectionString = sql.ConnectionString;
+>>>>>>> Storeonline/thienlam
             this.Database.Connection.ConnectionString = "Data Source=SQL5050.site4now.net;Initial Catalog=DB_A69BFA_tanloc1999;User Id=DB_A69BFA_tanloc1999_admin;Password=Loc@123456";
         }
 

@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\202012071540533_a.cs" />
     <Compile Include="Migrations\202012071540533_a.designer.cs">
       <DependentUpon>202012071540533_a.cs</DependentUpon>
@@ -162,6 +163,11 @@
     <Compile Include="Migrations\202012080837016_update.cs" />
     <Compile Include="Migrations\202012080837016_update.designer.cs">
       <DependentUpon>202012080837016_update.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\202012120542146_á.cs" />
+    <Compile Include="Migrations\202012120542146_á.designer.cs">
+      <DependentUpon>202012120542146_á.cs</DependentUpon>
+>>>>>>> Storeonline/thienlam
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\connectDB.cs" />
@@ -185,6 +191,10 @@
     <Content Include="Content\Image\carousel\iphone.png" />
     <Content Include="Content\Image\carousel\oppo.png" />
     <Content Include="Content\Image\carousel\samsung.png" />
+<<<<<<< HEAD
+=======
+    <Content Include="Content\Image\logo\hinhnenlogint.jpg" />
+>>>>>>> Storeonline/thienlam
     <Content Include="Content\Image\logo\iphonelogin.jpg" />
     <Content Include="Content\Image\Products\phonedemo.png" />
     <Content Include="Content\js\main.js" />
@@ -423,6 +433,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\202012071540533_a.resx">
       <DependentUpon>202012071540533_a.cs</DependentUpon>
     </EmbeddedResource>
@@ -431,6 +442,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012080837016_update.resx">
       <DependentUpon>202012080837016_update.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\202012120542146_á.resx">
+      <DependentUpon>202012120542146_á.cs</DependentUpon>
+>>>>>>> Storeonline/thienlam
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

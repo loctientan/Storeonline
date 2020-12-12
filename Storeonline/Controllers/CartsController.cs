@@ -79,6 +79,7 @@ namespace Storeonline.Areas.admin.Controllers
 
         public ActionResult Pay(FormCollection form)
         {
+<<<<<<< HEAD
            
             
             try
@@ -91,14 +92,25 @@ namespace Storeonline.Areas.admin.Controllers
                 string Code = sMonth + sDay + sMin + sMili;
                 
                 //user.CustomerNotAccount = true;
+=======
+            User user = new User();
+            if(user.Username == null)
+            {
+                user.CustomerNotAccount = true;
+>>>>>>> Storeonline/thienlam
                 FunctionCart functionCart = Session["FunctionCart"] as FunctionCart;
                 Invoice invoice = new Invoice();
                 PaymentCategory paymentCategory = new PaymentCategory();
                 invoice.CreateDate = DateTime.Now;
+<<<<<<< HEAD
                 invoice.InvoiceCode = "HD" + Code;       
                 //user = Session["Username"] as User;                
                 
                 //invoice.UserID = user.UserID;
+=======
+                //User user = Session["Username"] as User;
+                invoice.UserID = user.UserID;
+>>>>>>> Storeonline/thienlam
                 invoice.UserCode = user.UserCode;
                 invoice.Email = form["email"];
                 invoice.LastName = form["lastname"];
@@ -106,7 +118,10 @@ namespace Storeonline.Areas.admin.Controllers
                 invoice.Phone = form["phone"];
                 invoice.Address = form["address"];
                 invoice.ghichu = form["ghichu"];
+<<<<<<< HEAD
                 invoice.Payment = 1;
+=======
+>>>>>>> Storeonline/thienlam
                 //invoice.Payment = paymentCategory.paymentcategoryID;
                 //invoice.PaymentCategory.paymentstatus = form.AllKeys.Single();
                 db.Invoices.Add(invoice);
@@ -115,20 +130,30 @@ namespace Storeonline.Areas.admin.Controllers
                 {
                     InvoiceDetails invoiceDetails = new InvoiceDetails();
 
+<<<<<<< HEAD
                     invoiceDetails.InvoiceID = invoice.InvoiceID;   
+=======
+                    invoiceDetails.InvoiceID = invoice.InvoiceID;
+>>>>>>> Storeonline/thienlam
                     invoiceDetails.UserCode = invoice.UserCode;
                     invoiceDetails.ProductID = item.Product.ProductID;
                     invoiceDetails.ProductName = item.Product.ProductName;
                     invoiceDetails.Price = item.Product.Price;
                     invoiceDetails.PromotionPrice = item.Product.PromotionPrice;
+<<<<<<< HEAD
                     invoiceDetails.Quantity = item.Quantity;                  
                     db.InvoiceDetails.Add(invoiceDetails);
               
+=======
+                    invoiceDetails.Quantity = item.Quantity;
+                    db.InvoiceDetails.Add(invoiceDetails);
+>>>>>>> Storeonline/thienlam
                 }
 
                 db.SaveChanges();
                 functionCart.RemoveCartAll();
                 SetAlert("Bộ phận bán hàng sẽ liên hệ bạn trong vòng 12h tới. Xin cảm ơn bạn đã mua hàng.", "success");
+<<<<<<< HEAD
                 return RedirectToAction("Details", "Invoices", new { id = invoice.InvoiceID});
             }
             //else if(user.Username != null)
@@ -170,6 +195,49 @@ namespace Storeonline.Areas.admin.Controllers
             //    return RedirectToAction("Details", "InvoiceDetails");
             //}
             catch
+=======
+                return RedirectToAction("Details", "InvoiceDetails");
+            }
+            else if(user.Username != null)
+            {
+                FunctionCart functionCart = Session["FunctionCart"] as FunctionCart;
+                Invoice invoice = new Invoice();
+                PaymentCategory paymentCategory = new PaymentCategory();
+                invoice.CreateDate = DateTime.Now;
+                user = Session["Username"] as User;
+                invoice.UserID = user.UserID;
+                invoice.UserCode = user.UserCode;
+                invoice.Email = user.Email;
+                invoice.LastName = user.LastName;
+                invoice.FirstName = user.FirstName;
+                invoice.Phone = user.Phone;
+                invoice.Address = user.Address;
+                invoice.ghichu = form["ghichu"];
+                //invoice.Payment = paymentCategory.paymentcategoryID;
+                //invoice.PaymentCategory.paymentstatus = form.AllKeys.Single();
+                db.Invoices.Add(invoice);
+
+                foreach (var item in functionCart.carts)
+                {
+                    InvoiceDetails invoiceDetails = new InvoiceDetails();
+
+                    invoiceDetails.InvoiceID = invoice.InvoiceID;
+                    invoiceDetails.UserCode = invoice.UserCode;
+                    invoiceDetails.ProductID = item.Product.ProductID;
+                    invoiceDetails.ProductName = item.Product.ProductName;
+                    invoiceDetails.Price = item.Product.Price;
+                    invoiceDetails.PromotionPrice = item.Product.PromotionPrice;
+                    invoiceDetails.Quantity = item.Quantity;
+                    db.InvoiceDetails.Add(invoiceDetails);
+                }
+
+                db.SaveChanges();
+                functionCart.RemoveCartAll();
+                SetAlert("Bộ phận bán hàng sẽ liên hệ bạn trong vòng 12h tới. Xin cảm ơn bạn đã mua hàng.", "success");
+                return RedirectToAction("Details", "InvoiceDetails");
+            }
+            else
+>>>>>>> Storeonline/thienlam
             { 
                 SetAlert("Đặt hàng không thành công. Vui lòng đặt lại.", "danger");
                 return RedirectToAction("ViewCart", "Carts");
