@@ -27,7 +27,7 @@
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="height:70px">
                 
-                <a  href="@Url.Action("Index","Home")" style="font-weight:bold; color:black">
+                <a  href="@Url.Action("Index","Home")" style="font-weight:bold; color:black; text-decoration:none" >
                     <img src="~/Content/Image/logo/logo.png"  style="width:50px;height:50px"/>
                     Smobile Premium
                 </a>
@@ -56,7 +56,7 @@
                         {
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Xin chào @Session["Username"].ToString() </a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" style="text-decoration:none">Xin chào @Session["Username"].ToString() </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/Customer/Details/@Session["userID"]">Tài khoản</a>
                                     <a class="dropdown-item" href="@Url.Action("ViewCart", "Carts")">Giỏ hàng</a>
@@ -68,7 +68,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a  style="color:black; font-weight:bold" href="@Url.Action("Login","Customer")">Đăng nhập</a>
+                                <a  style="color:black; font-weight:bold; text-decoration:none" href="@Url.Action("Login","Customer")">Đăng nhập</a>
                             </li>
                         }
                     </div>

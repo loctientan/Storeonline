@@ -29,6 +29,7 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <input type="text" class="form-control" name="lastname" placeholder="Họ và tên đệm" />
+                                
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -109,12 +110,15 @@
                                         @foreach (var item in Model.carts)
                                         {
                                             int total = Convert.ToInt32((item.Product.Price - item.Product.PromotionPrice) * item.Quantity);
+                                            int price = Convert.ToInt32(item.Product.Price - item.Product.PromotionPrice);
                                             <tr>
-                                                <td style="height: 100%;width: 10vw; text-align:center">
+                                                <td style="height: 100%;width: 30vw; text-align:left">
                                                     @Html.DisplayFor(model => item.Product.ProductName)
+                                                    @Html.DisplayFor(model => item.Product.ProductCode)
                                                 </td>
                                                 <td style="height: 100%;width: 10vw;text-align:center  ">
-                                                    @Html.DisplayFor(model => item.Product.Price, new { id = item.Product.ProductID })
+                                                    @*@Html.DisplayFor(model => item.Product.Price, new { id = item.Product.ProductID })*@
+                                                    @price.ToString("##,###,### VNĐ")
                                                 </td>
                                                 @using (Html.BeginForm("updateQuantity", "Carts"))
                                                 {
@@ -129,7 +133,7 @@
                                                     <td style="text-align:center">
                                                         <button type="submit" class="btn btn-outline-light" style="margin-right:7px">
                                                             <a href="">
-                                                                <i class="fa fa-refresh" style="font-size:20px; color:blue"></i>
+                                                                <i class="fas fa-sync-alt" style="font-size:20px; color:blue"></i>
                                                             </a>
                                                         </button>
                                                     </td>

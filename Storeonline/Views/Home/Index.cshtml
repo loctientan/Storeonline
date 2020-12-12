@@ -141,7 +141,7 @@
                                 <div class="input-group ">
                                     <input type="text" class="form-control" style="height:50px; width:450px" placeholder="Bạn cần tìm gì?" aria-label="Tìm kiếm..." id="ten" name="ten" />
                                     <input type="text" class="form-control" style="height:50px; width:450px" placeholder="Bạn mong muốn giá bao nhiêu?" aria-lable="Tìm kiếm..." aria-describedby="basic-addon2" id="price" name="price" />
-                                    <button class="btn btn-success" style="height:50px; width:68px" type="button">
+                                    <button class="btn btn-success" style="height:50px; width:68px" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -162,13 +162,13 @@
             <div class="card-group" >
                 <div class="card" style="width:17rem; margin-bottom:30px; border-radius: 0px">
 
-                    <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID})">
+                    <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID})" style="text-decoration:none">
                         <div class="img">
                             <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
                         </div>
                     </a>
                     <div class="card-body">
-                        <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID })">
+                        <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID })" style="text-decoration:none">
                             <h3 class="card-title" style="font-size:medium ;font-weight:bold">@item.ProductName @item.ProductCode</h3>
                             @*<p class="card-text"> @item.Description</p>*@
                             

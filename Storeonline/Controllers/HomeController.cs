@@ -50,11 +50,14 @@ namespace Storeonline.Controllers
         // GET: Home/Details/5
         public ActionResult DetailProducts(int? id)
         {
+            Product pr = new Product();
+   
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+            int price = pr.Price - pr.PromotionPrice;
             if (product == null)
             {
                 return HttpNotFound();
