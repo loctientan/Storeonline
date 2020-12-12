@@ -6,15 +6,14 @@ using System.Web.Mvc;
 using Storeonline.Models;
 using Storeonline.Areas.admin.Controllers;
 using PagedList;
-
+using System.Net;
 
 namespace Storeonline.Controllers
 {
     public class HomeController : Controller
     {
         private connectDB db = new connectDB();
-
-
+        // GET: Home
         public ActionResult Index(string id, int? page, string ten, string price)
         {
             int pageSize = 8;
@@ -32,6 +31,7 @@ namespace Storeonline.Controllers
                               select r).OrderBy(x => x.ProductID);
                 return View(result.ToPagedList(pageNumber, pageSize));
             }
+
             if (!String.IsNullOrEmpty(ten) || !String.IsNullOrEmpty(price))
             {
                 var result = (from r in db.Products
@@ -43,21 +43,92 @@ namespace Storeonline.Controllers
 
             var links = (from l in db.Products
                          select l).OrderBy(x => x.ProductID);
+
             return View(links.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult About()
+        // GET: Home/Details/5
+        public ActionResult DetailProducts(int? id)
         {
-            ViewBag.Message = "Your application description page.";
+            Product pr = new Product();
+   
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            int price = pr.Price - pr.PromotionPrice;
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
 
+        // GET: Home/Create
+        public ActionResult Create()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        // POST: Home/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
-            ViewBag.Message = "Your contact page.";
+            try
+            {
+                // TODO: Add insert logic here
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Edit/5
+        public ActionResult Edit(int id)
+        {
             return View();
+        }
+
+        // POST: Home/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Home/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Home/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

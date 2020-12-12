@@ -1,0 +1,47 @@
+﻿@model Storeonline.Models.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .fromlg {
+        width: 40%;
+        text-align: center;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+</style>
+
+<body>
+
+
+
+    @Html.ValidationMessage("Error", new { @style = "color:red" })
+    @using (Html.BeginForm("Login", "Customer", FormMethod.Post))
+    {
+
+
+    <div class="fromlg">
+        <center><div class="card-header" style="font-weight:bold">ĐĂNG NHẬP </div></center>
+        <div class="card-body">
+            <!--Thông báo lỗi hiển thị-->
+            @if (TempData["AlertMessage"] != null)
+            {
+    <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="margin-bottom:10px">
+        @TempData["AlertMessage"]
+    </div>}
+
+            <input required="" type="text" value="" placeholder="Username" class="text form-control" aria-describedby="basic-addon1" name="Username" id="Username" style="width:100%">
+            <input required="" type="password" value="" placeholder="Password" class="text form-control" aria-describedby="basic-addon1" name="Password" id="Password" style="width:100%">
+
+            <div class="resetorregister">
+                <a href="#"><ins>Quên mật khẩu</ins></a> &nbsp; <a placeholder>|</a> &nbsp; <a href="@Url.Action("Signup", "Customer")"><ins>Đăng kí</ins></a>
+            </div>
+            <br>
+            <center><button type="submit" class="btn btn-primary">ĐĂNG NHẬP</button></center>
+        </div>
+    </div>
+    }
+</body>

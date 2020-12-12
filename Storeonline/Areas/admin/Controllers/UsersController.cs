@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Storeonline.Models;
 
 namespace Storeonline.Areas.admin.Controllers
@@ -14,20 +15,21 @@ namespace Storeonline.Areas.admin.Controllers
     {
         private connectDB db = new connectDB();
 
+
         public ActionResult Login(User _user)
         {
             var check = db.Users.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password)).FirstOrDefault();
-            if (check == null)
+            if (ModelState.IsValid)
             {
-                //ViewBag.error = "";
-                return View("Login", _user);
+                SetAlert("Bạn vui lòng điền thông tin đăng nhập", "danger");
+                return View("Login");
             }
             else
             {
                 var test = db.Users.FirstOrDefault(s => s.Username == _user.Username);
                 if (test.Username != "admin")// khong phai admin
                 {
-                    Session["Username"] = check.Username;
+                    Session.Add("Username", check.Username);
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else//neu la admin
@@ -35,6 +37,14 @@ namespace Storeonline.Areas.admin.Controllers
                     return RedirectToAction("Index", "Products");
                 }
             }
+
+        }
+        public ActionResult LogOut()
+        {
+            //FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            Session.Clear();
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
         public ActionResult Signup(User _user)
         {
@@ -55,7 +65,7 @@ namespace Storeonline.Areas.admin.Controllers
                 }
             }
             return View();
-        }           
+        }
         // GET: admin/Users
         public ActionResult Index()
         {
@@ -169,6 +179,27 @@ namespace Storeonline.Areas.admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        //Đặt thông báo lỗi
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "danger")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
+            else
+            {
+                TempData["AlertType"] = "alert-info";
+            }
         }
     }
 }

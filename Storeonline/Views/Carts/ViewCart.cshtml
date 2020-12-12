@@ -1,0 +1,193 @@
+﻿@model Storeonline.Models.FunctionCart
+
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+
+
+    <div style="font-family:'Noto Serif'">
+        <div class="modal fade" id="thanhtoan" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="dialog" id="thanhtoan" style="margin-top:50px; margin-bottom:50px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="col-sm-12">
+                            <h3 class="modal-title" style=" text-align:center;font-family:'Noto Serif'"> THÔNG TIN MUA HÀNG</h3>
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("Pay", "Carts"))
+                    {
+                        
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="email" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="lastname" placeholder="Họ và tên đệm" />
+                                
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="firstname" placeholder="Tên" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="address" placeholder="Địa chỉ giao hàng" />
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+
+                                    <label> Hình thức thanh toán</label>
+                            
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+
+                                    <textarea class="form-control" placeholder="Ghi chú" name="ghichu"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <center><input type="submit" value="ĐẶT HÀNG" class="btn btn-primary" data-toggle="modal" data-target="modal_thanhtoanthanhcong" /></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!--Thông báo lỗi hiển thị-->
+                    @if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="margin-top:20px">
+                            @TempData["AlertMessage"]
+                        </div>
+                    }
+
+
+                    <div class="card" style="margin-top:50px; margin-bottom:50px">
+                        <div class="card-body">
+                            <h2 style="text-align:center; font-family:'Noto Serif'">THÔNG TIN GIỎ HÀNG</h2>
+
+                            <br />
+                            @if (Model != null)
+                            {
+                                <table class="table">
+                                    <thead class="bg-primary" style="color:white">
+                                        <tr>
+                                            <th style="text-align:center"> Sản phẩm</th>
+                                            <th style="text-align:center">Đơn giá</th>
+                                            <th style="text-align:center"> Số lượng</th>
+                                            <th style="text-align:center">Thành tiền</th>
+                                            <th colspan="2" style="text-align:center">Tính năng</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.carts)
+                                        {
+                                            int total = Convert.ToInt32((item.Product.Price - item.Product.PromotionPrice) * item.Quantity);
+                                            int price = Convert.ToInt32(item.Product.Price - item.Product.PromotionPrice);
+                                            <tr>
+                                                <td style="height: 100%;width: 30vw; text-align:left">
+                                                    @Html.DisplayFor(model => item.Product.ProductName)
+                                                    @Html.DisplayFor(model => item.Product.ProductCode)
+                                                </td>
+                                                <td style="height: 100%;width: 10vw;text-align:center  ">
+                                                    @*@Html.DisplayFor(model => item.Product.Price, new { id = item.Product.ProductID })*@
+                                                    @price.ToString("##,###,### VNĐ")
+                                                </td>
+                                                @using (Html.BeginForm("updateQuantity", "Carts"))
+                                                {
+                                                    <td style="height: 100%;width: 8vw; text-align:center">
+                                                        <input type="hidden" value="@item.Product.ProductID" name="ProductID" />
+                                                        <input type="number" value="@item.Quantity" name="Quantity" style="text-align:center" class="form-control" />
+                                                    </td>
+
+                                                    <td style="text-align:center">
+                                                        <center> <strong><a style="color:green"> @total.ToString("##,###,### VNĐ")</a></strong></center>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <button type="submit" class="btn btn-outline-light" style="margin-right:7px">
+                                                            <a href="">
+                                                                <i class="fas fa-sync-alt" style="font-size:20px; color:blue"></i>
+                                                            </a>
+                                                        </button>
+                                                    </td>
+                                                }
+                                                <td>
+
+                                                    @using (Html.BeginForm("DeleteProduct", "Carts", new { id = item.Product.ProductID }))
+                                                    {
+
+                                                        <button class="btn btn-outline-light" type="submit">
+                                                            <a href="#">
+                                                                <i class="fa fa-trash" style="font-size:20px; color:red"></i>
+                                                            </a>
+                                                        </button>
+                                                    }
+                                                </td>
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3">
+                                                <strong> Tổng thành tiền:</strong>
+                                            </td>
+                                            <td>
+                                                <strong> <p style="text-align:center"> @Model.totalCart().ToString(("###,###,### VNĐ"))</p></strong>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2"> </div>
+                            <div class="col-lg-10" style="margin-bottom:35px ;text-align:right">
+                                <div class="form-group ">
+                                    <a class="btn btn-primary" style="width:250px; margin-right:10px" href="@Url.Action("Index", "Home")">
+                                        TIẾP TỤC MUA HÀNG
+                                    </a>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#thanhtoan" style="width:250px; margin-right:10px">
+                                        THỰC HIỆN ĐẶT HÀNG
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

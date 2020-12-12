@@ -41,7 +41,6 @@ namespace Storeonline.Areas.admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.ProductCategories, "CategoryID", "Name");
-     
             return View();
         }
 
@@ -52,15 +51,21 @@ namespace Storeonline.Areas.admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Product product)
         {
+            product.CreateDate = DateTime.Now;
+            product.CreateBy = null;
+            product.ModifiedBy = null;
+            product.Quantity = 0;
+            product.TopHot = DateTime.Now;
+            product.ViewCounts = 0;
             try
             {
-                if(product.ImageUpload != null)
+                if (product.ImageUpload != null)
                 {
                     string filename = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
                     string extension = Path.GetExtension(product.ImageUpload.FileName);
                     filename = filename + extension;
-                    product.ProductImage = "~/Content/Image/logo/" + filename;
-                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/logo"), filename));
+                    product.ProductImage = "~/Content/Image/Products/" + filename;
+                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/Products/"), filename));                  
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -93,7 +98,7 @@ namespace Storeonline.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductCode,ProductName,Description,ProductImage,Price,PromotionPrice,Quantity,CategoryID,Detail,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,TopHot,ViewCounts")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductCode,ProductName,Description,ProductImage,Price,PromotionPrice,Quantity,CategoryID,Detail,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status,ShowOnHome,TopHot,ViewCounts")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +135,12 @@ namespace Storeonline.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public ActionResult ChonHang()
+        {
+            ProductCategory hang = new ProductCategory();
+            hang.ProductCategories = db.ProductCategories.ToList<ProductCategory>();
+            return PartialView(hang);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -138,12 +148,6 @@ namespace Storeonline.Areas.admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult ChonHang()
-        {
-            ProductCategory hang = new ProductCategory();
-            hang.ProductCategories = db.ProductCategories.ToList<ProductCategory>();
-            return PartialView(hang);
         }
     }
 }

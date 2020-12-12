@@ -1,2 +1,3 @@
-﻿@model  Storeonline.Models.ProductCategory
+﻿
+@model  Storeonline.Models.ProductCategory
 @Html.DropDownListFor(m => m.CategoryID, new SelectList(Model.ProductCategories, "CategoryID", "Name", "--Select--"))

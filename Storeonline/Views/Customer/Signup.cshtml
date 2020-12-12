@@ -1,0 +1,80 @@
+﻿@model Storeonline.Models.User
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    section {
+        display: -webkit-flex;
+        display: flex;
+        padding-top: 50px;
+        width: 50%;
+        
+    }
+    nav {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      /*  background: #ccc;*/
+        padding: 20px;
+    }
+    article {
+        -webkit-flex: 3;
+        -ms-flex: 3;
+        flex: 3;
+        background-color: #f1f1f1;
+        padding: 10px;
+    }
+    h2{
+        text-align:center;
+    }
+    .resetorregister{
+        text-align:center;
+    }
+    .fontreg
+    {
+        /*border-style:solid;
+        border-width:5px;*/
+        width: 40%;
+        text-align:center;
+        margin:auto;
+        padding-top:50px;
+        padding-bottom: 50px;
+    }
+</style>
+<body>
+    @Html.ValidationMessage("Error", new {@style = "color:red" })
+    @using (Html.BeginForm("LogOut", "Customer", FormMethod.Post))
+    {
+        @*<nav>
+            <img src="~/Content/Image/logo/hinhnenlogint.jpg" />
+        </nav>*@
+    <div class="fontreg">
+        <!--Thông báo lỗi hiển thị-->
+        @if (TempData["AlertMessage"] != null)
+        {
+    <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style="margin-bottom:10px">
+        @TempData["AlertMessage"]
+    </div>                }
+    <center><div class="card-header" style="font-weight:bold">ĐĂNG KÍ </div></center>
+        <hr />
+        @*<input required="" type="text" value="" placeholder="UserCode" class="text form-control" aria-describedby="basic-addon1" name="UserCode" id="UserCode" style="width:100%">*@
+        <input required="" type="text" value="" placeholder="LastName" class="text form-control" aria-describedby="basic-addon1" name="LastName" id="LastName" style="width:100%">
+        <input required="" type="text" value="" placeholder="FirstName" class="text form-control" aria-describedby="basic-addon1" name="FirstName" id="FirstName" style="width:100%">
+        <input required="" type="text" value="" placeholder="Address" class="text form-control" aria-describedby="basic-addon1" name="Address" id="Address" style="width:100%">
+        <input required="" type="text" value="" placeholder="Phone" class="text form-control" aria-describedby="basic-addon1" name="Phone" id="Phone" style="width:100%">
+        <input required="" type="text" value="" placeholder="Email" class="text form-control" aria-describedby="basic-addon1" name="Email" id="Email" style="width:100%">
+        <input required="" type="text" value="" placeholder="Username" class="text form-control" aria-describedby="basic-addon1" name="Username" id="Username" style="width:100%">
+        <input required="" type="password" value="" placeholder="Password" class="text form-control" aria-describedby="basic-addon1" name="Password" id="Password" style="width:100%">
+        <input required="" type="password" value="" placeholder="ConfirmPassword" class="text form-control" aria-describedby="basic-addon1" name="ConfirmPassword" id="ConfirmPassword" style="width:100%">
+
+        <div class="resetorregister">
+            <a href="#"><ins>Quên mật khẩu</ins></a> &nbsp; <a placeholder>|</a> &nbsp; <a href="@Url.Action("Login", "Customer")"><ins>Đăng Nhập</ins></a>
+        </div>
+        <br>
+        <center><button type="submit" class="btn btn-primary">ĐĂNG KÍ</button></center>
+    </div>
+
+    }
+</body>

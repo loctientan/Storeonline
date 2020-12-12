@@ -7,13 +7,13 @@ namespace Storeonline.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class stoa : IMigrationMetadata
+    public sealed partial class á : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(stoa));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(á));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012081202297_stoa"; }
+            get { return "202012120542146_á"; }
         }
         
         string IMigrationMetadata.Source

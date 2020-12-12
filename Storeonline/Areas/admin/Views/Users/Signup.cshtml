@@ -1,174 +1,124 @@
 ﻿@model Storeonline.Models.User
 @{
     ViewBag.Title = "Signup";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            * {
-                box-sizing: border-box;
-            }
+        @Html.AntiForgeryToken()
 
-            img {
-                display: block;
-                width: 670px;
-                height: 628px;
-            }
+                <div class="form-horizontal">
+                    <h4>User</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            /* Container for flexboxes */
-            section {
-                margin-top: 50px;
-                margin-bottom: 50px;
-                display: flex;
-                width: 100%;
-            }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-            /* Style the navigation menu */
-            nav {
-                width: 60%;
-                background: #ccc;
-                height: 550px;
-            }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                nav ul {
-                    list-style-type: none;
-                    padding: 0;
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsStaff, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsStaff)
+                                @Html.ValidationMessageFor(model => model.IsStaff, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.RoleID, "RoleID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Tạo tài khoản" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
                 }
 
-            /* Style the content */
-            article {
-                width: 35%;
-                background-color: white;
-                padding: 10px;
-                padding-top: 10px;
-            }
-
-            .title-login {
-                margin-top: 20px;
-                text-align: center;
-            }
-
-            .tieudelogin {
-                text-align: center;
-            }
-
-            .btn-login {
-                text-align: center;
-            }
-
-            h4 {
-                font-weight: bold;
-            }
-
-            button {
-                padding: 5px 20px;
-                border-radius: 20px;
-                -moz-border-radius: 20px;
-                -webkit-border-radius: 20px;
-                border: none;
-                background: #8AC007;
-                color: #fff;
-                cursor: pointer;
-            }
-
-            .btn-login {
-                text-align: center;
-            }
-
-            input {
-                padding: 5px 20px;
-                border-radius: 20px;
-            }
-
-            .font-login {
-                width: 100%;
-                height: 628px;
-            }
-
-            .resetorregister {
-                text-align: center;
-                font-size: 13px;
-            }
-
-            a {
-                color: #498ad0;
-            }
-        </style>
-    </head>
-    <body>
-        <section class="font-login">
-            <nav>
-                    <img src="~/Content/Image/logo/imglogin.jpg" />
-            </nav>
-            <article>
-                <div class="tieudelogin">
-                    <h4 style="color:black">SIGN UP</h4><br>
-                </div>
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line __web-inspector-hide-shortcut__" data-val="true" id="LastName" name="LastName" type="text" value="" placeholder="Họ, tên đệm">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="form-control text-box single-line" data-val="true" id="FirstName" name="FirstName" type="text" value="" placeholder="Tên">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Address" name="Address" type="text" value="" placeholder="Địa chỉ">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input  class="input-validation-error form-control text-box single-line" data-val="true" id="Phone" name="Phone" type="number" value="" placeholder="Số điện thoại" >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Email" name="Email" type="text" value="" placeholder="Email">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Username" name="Username" type="text" value="" placeholder="Username">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line" data-val="true" id="Password" name="Password" type="password" value="" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md">
-                        <input class="input-validation-error form-control text-box single-line" data-val="true" data-val-equalto="Password và Confirm Password phải giống nhau" data-val-equalto-other="*.Password" id="ConfirmPassword" name="ConfirmPassword" type="password" value="" placeholder="Confirm Password">
-                    </div>
-                </div>
-                <div class="resetorregister">
-                    <a href="@Url.Action("Login","Users")"> <ins>Return to login page</ins></a>
-                </div>
-                <br>
-                <div class="btn-login">
-                    <button>SIGN UP</button>
-                </div>
-            </article>
-        </section>
-    </body>
-</html>
-}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

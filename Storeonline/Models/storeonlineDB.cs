@@ -11,6 +11,7 @@ namespace Storeonline.Models
 {
     public class ProductCategory
     {
+
         [Key]
         [DisplayName("Nhà sản xuất")]
         public int CategoryID { get; set; }
@@ -53,7 +54,13 @@ namespace Storeonline.Models
 
     public class Product 
     {
-       [Key]
+        public Product()
+        {
+            ProductImage = "~/Content/Image/Products/phonedemo.png";
+        }
+
+
+        [Key]
        public int ProductID { get; set;}
 
        [DisplayName("Mã sản phẩm")]
@@ -69,22 +76,14 @@ namespace Storeonline.Models
         public string Description { get; set; }
 
         [DisplayName("Ảnh sản phẩm")]
-        [Required(ErrorMessage = "Vui lòng nhập")]
         public string ProductImage { get; set; }
 
-
-        public Product()
-        {
-            ProductImage = "~/Content/Image/logo/add.png";
-        }
-        [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
 
         [DisplayName("Giá sản phẩm")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public int Price { get; set; }
 
-        [DisplayName("Giá khuyến mãi")]
+        [DisplayName("Khuyến mãi")]
         [Required(ErrorMessage = "Vui lòng nhập")]
         public int PromotionPrice { get; set; }
 
@@ -120,11 +119,16 @@ namespace Storeonline.Models
         [DisplayName("Trạng thái")]
         public bool Status { get; set; }
 
+        [DisplayName("Hiển thị tại trang chủ")]
+        public bool ShowOnHome { get; set; }
+
+
         [DisplayName("Top Hot")]
         public DateTime TopHot { get; set; }
 
         [DisplayName("Lượt xem")]
         public int ViewCounts {get; set; }
+
 
         public virtual ICollection<Invoice> Invoices { get; set; }
 
@@ -133,8 +137,11 @@ namespace Storeonline.Models
         public ProductCategory ProductCategorys { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
+
         [NotMapped]
-        public HttpPostedFileBase ImageUploadPro { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+
     }
 
     public class User
@@ -196,6 +203,9 @@ namespace Storeonline.Models
         public Role Role { get; set; }
 
         public virtual ICollection<Cart> Carts { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 
     public class Role
@@ -237,6 +247,71 @@ namespace Storeonline.Models
         public HttpPostedFileBase ImageUpload { get; set; }
     }
 
+    public class FunctionCart
+    {
+        List<Cart> listcarts = new List<Cart>();
+        public IEnumerable<Cart> carts
+        {
+            get { return listcarts; }
+        }
+
+        //Tổng thành tiền
+        public int totalCart()
+        {
+
+            var totalcart = listcarts.Sum(s => ( s.Product.Price - s.Product.PromotionPrice) *( s.Quantity));
+            return (int)totalcart;
+        }
+
+        //Thêm sản phẩm vào giỏ hàng
+        public void addCart(User us, Product product, int quantity = 1)
+        {
+            var item = listcarts.FirstOrDefault(s => s.Product.ProductID == product.ProductID);
+                if (item == null)
+            {
+                listcarts.Add(new Cart
+                {
+                    User = us,
+                    Product = product,
+                    Quantity = quantity               
+                }); 
+            }
+            else
+            {
+                item.Quantity += quantity;
+            }
+        }
+
+        public Cart GetItem(int id)
+        {
+            var item = listcarts.Find(s => s.Product.ProductID.Equals(id));
+            return item;
+        }
+
+        //Cập nhật số lượng vào giỏ
+        public void Update_Quantity(int id, int quantity)
+        {
+            var item = listcarts.Find(s => s.Product.ProductID.Equals(id));
+            if(item != null)
+            {
+                item.Quantity = quantity;
+            }
+        }
+
+        //Xóa sản phẩm khỏi giỏ hàng
+        public void RemoveCartItem(int id)
+        {
+            listcarts.RemoveAll(s => s.Product.ProductID.Equals(id));
+        }
+
+        public void RemoveCartAll()
+        {
+            listcarts.Clear();
+        }
+    }
+
+   
+
     public class Invoice
     {
         [Key]
@@ -269,6 +344,9 @@ namespace Storeonline.Models
         [Required(ErrorMessage = "Vui lòng nhập thông tin")]
         public string Address { get; set; }
 
+        [DisplayName("Hình thức thanh toán")]
+        [ForeignKey("PaymentCategory")] public int? paymentCategoryID { get; set; }
+        public PaymentCategory PaymentCategory { get; set; }
 
         [DisplayName("Ghi chú")]
         [Required(ErrorMessage = "Vui lòng nhập thông tin")]
@@ -317,6 +395,7 @@ namespace Storeonline.Models
 
         public Invoice Invoice { get; set; }
         public Product Product { get; set; }
+
     }
 
     public class NewsCategory
@@ -448,6 +527,26 @@ namespace Storeonline.Models
 
         [DisplayName("Thời gian tạo")]
         public DateTime? CreateDate { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageUpload { get; set; }
+    }
+
+    public class PaymentCategory
+    {
+        [Key]
+        public int paymentcategoryID { get; set; }
+
+        [DisplayName("Hình thức thanh toán")]
+        public string paymentstatus { get; set; }
+
+
+        public virtual ICollection<Invoice> Invoice { get; set; }
+
+        [NotMapped]
+        public List<PaymentCategory> PaymentCategories { get; set; }
+
+      
     }
 
     public class OrderStatusCategory

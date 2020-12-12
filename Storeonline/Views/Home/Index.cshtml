@@ -1,136 +1,191 @@
 ﻿@model PagedList.IPagedList<Storeonline.Models.Product>
 @using PagedList.Mvc;
-@{ ViewBag.Title = "Home Page"; }
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Trang chủ</title>
+    <script src="~/assets/OwlCarousel/jquery.min.js"></script>
+    <script src="~/assets/OwlCarousel/owl.carousel.js"></script>
+    <link href="~/assets/OwlCarousel/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/assets/OwlCarousel/owl.theme.default.css" rel="stylesheet" />
+    <link href="~/assets/css/PagedList.css" rel="stylesheet" />
+
+</head>
+
+<style type="text/css">
+    h4, h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: black;
+    }
+
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    /*Hiệu ứng rê chuột*/
+    .img:hover div.txt {
+        opacity: 1;
+        transform: translateY(3px);
+        transition: ease-in-out 0.5s;
+    }
+
+    .img:hover img {
+        transform: scale(1.2);
+        transition: all ease-in-out 0.5s;
+    }
+</style>
+
+<header>
+   
+    <script>
+        //Thời gian chạy sildes
+        $('.carousel').carousel({
+            interval: 1000
+        })
+        $('#myCarousel').on('slide.bs.carousel', function () {
+
+        })
+    </script>
+
+</header>
 
 <body>
-    <!-- Main Slider Start -->
-    @using (Html.BeginForm("Index", "Home"))
-    {
-        <div class="form-group row" style="padding: 6px 0px 0px 0px ">
-            <input type="text" class="col-sm-4" placeholder="Tìm kiếm..." aria-label="Tìm kiếm..." aria-describedby="basic-addon2" id="ten" name="ten" />
-            <input type="text" class="col-sm-4" placeholder="Tìm giá..." aria-lable="Tìm kiếm..." aria-describedby="basic-addon2" id="price" name="price" />
-            <input type="submit" value="Tìm" class="col-sm-2" />
-        </div>
-    }
-        <div class="header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <nav class="navbar bg-light">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-home"></i>Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i>Best Selling</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-plus-square"></i>New Arrivals</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="header-slider normal-slider">
-                            <div class="header-slider-item">
-                                <img src="img/slider-1.jpg" alt="Slider Image" />
-                                <div class="header-slider-caption">
-                                    <p>Some text goes here that describes the image</p>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-                                </div>
-                            </div>
-                            <div class="header-slider-item">
-                                <img src="img/slider-2.jpg" alt="Slider Image" />
-                                <div class="header-slider-caption">
-                                    <p>Some text goes here that describes the image</p>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-                                </div>
-                            </div>
-                            <div class="header-slider-item">
-                                <img src="img/slider-3.jpg" alt="Slider Image" />
-                                <div class="header-slider-caption">
-                                    <p>Some text goes here that describes the image</p>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="header-img">
-                            <div class="img-item">
-                                <img src="img/category-1.jpg" />
-                                <a class="img-text" href="">
-                                    <p>Some text goes here that describes the image</p>
-                                </a>
-                            </div>
-                            <div class="img-item">
-                                <img src="img/category-2.jpg" />
-                                <a class="img-text" href="">
-                                    <p>Some text goes here that describes the image</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Main Slider End -->
-        <!-- Brand Start -->
-        <div class="brand">
-            <div class="container-fluid">
-                <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
-                </div>
-            </div>
-        </div>
-        <!-- Brand End -->
-        <div class="container">
-            <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="card" style="width:16rem;margin:10px">
 
-                        <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID})">
-                            <div class="img">
-                                <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
+
+    <div class="container-fluid" style="margin-top:15px">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="list-group" style="margin-right:5px">
+                    <button type="button" class="list-group-item list-group-item-action     " aria-current="true" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-mobile" style="padding-right:18px"> </i> Điện Thoại
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-laptop" style="padding-right:10px"> </i> Laptop
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-tablet" style="padding-right:18px"></i>Tablet
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-music" style="padding-right:18px"></i>Âm Thanh
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fas fa-clock" style="padding-right:18px"></i>Đồng Hồ
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-home" style="padding-right:16px"></i>Nhà Thông Minh
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-headphones" style="padding-right:18px"></i>Phụ Kiện
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fas fa-sim-card" style="padding-right:18px"></i>Sim thẻ
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="far fa-newspaper" style="padding-right:15px"></i>Tin Công Nghệ
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action" style="padding: 10px 5px 10px 20px; font-size:smaller; font-weight:bold">
+                        <i class="fa fa-tag" style="padding-right:18px"></i>Khuyến Mãi
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row" style="height:320px">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="~/Content/Image/carousel/iphone.png" class="d-block" style="width:1000px; height:320px" alt="..." />
                             </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/Image/carousel/oppo.png" class="d-block" style="width: 1000px; height: 320px" alt="..." />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/Image/carousel/samsung.png" class="d-block" style="width: 1000px; height: 320px" alt="..." />
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
                         </a>
-                        <div class="card-body">
-                            <a href="@Url.Action("DetailsProducts", "Products", new { id = item.ProductID })">
-                                <h3 class="card-title">@item.ProductName</h3>
-                                <p class="card-text"> @item.Description</p>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row" style="background-color:#ffd900;height:80px ;width:1000px">
 
-                                <h4 style="color:red;font-size:larger;font-family:'Noto Serif'"> @item.Price.ToString("#,#00")đ</h4>
-                            </a>
-                            <br />
+                    @using (Html.BeginForm("Index", "Home"))
+                    {
+                        <form>
+                            <div class="input-group" style="margin: 20px 0px 20px 10px; padding:0">
 
-                        </div>
 
-                    </div>}
+
+                                <div class="input-group ">
+                                    <input type="text" class="form-control" style="height:50px; width:450px" placeholder="Bạn cần tìm gì?" aria-label="Tìm kiếm..." id="ten" name="ten" />
+                                    <input type="text" class="form-control" style="height:50px; width:450px" placeholder="Bạn mong muốn giá bao nhiêu?" aria-lable="Tìm kiếm..." aria-describedby="basic-addon2" id="price" name="price" />
+                                    <button class="btn btn-success" style="height:50px; width:68px" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+
+
+                </div>
             </div>
         </div>
+    </div>
+    <div class="container" style="margin-top:30px">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                int discount = item.Price - item.PromotionPrice;
+            <div class="card-group" >
+                <div class="card" style="width:17rem; margin-bottom:30px; border-radius: 0px">
 
-        <div class="col-sm-12" style="text-align:center;">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID})" style="text-decoration:none">
+                        <div class="img">
+                            <img src=" @Url.Content(item.ProductImage) " class="card-img-top" alt="Phone Photo">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <a href="@Url.Action("DetailProducts", "Home", new { id = item.ProductID })" style="text-decoration:none">
+                            <h3 class="card-title" style="font-size:medium ;font-weight:bold">@item.ProductName @item.ProductCode</h3>
+                            @*<p class="card-text"> @item.Description</p>*@
+                            
+                            <h4 class="card-text" style="color:#e70e02; font-size:larger;font-weight:bold ;font-family:'Helvetica'"> @discount.ToString("#,#00")đ </h4>
+                            <strike style="color:gray"><h5 class="card-text" style="color: gray; font-size: small; font-family: 'Helvetica' "> @item.Price.ToString("#,#00")đ  </h5></strike>
+                        </a>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            }
+
         </div>
-    </body>
+
+    </div>
+    <div class="col-sm-12" style="text-align:center;">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</body>
+</html>

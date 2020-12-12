@@ -17,6 +17,7 @@ namespace Storeonline.Models
             sql.InitialCatalog = "StoreOnline";
             sql.IntegratedSecurity = true;
             this.Database.Connection.ConnectionString = sql.ConnectionString;
+            this.Database.Connection.ConnectionString = "Data Source=SQL5050.site4now.net;Initial Catalog=DB_A69BFA_tanloc1999;User Id=DB_A69BFA_tanloc1999_admin;Password=Loc@123456";
         }
 
         public virtual DbSet<Product> Products {get;set;}
@@ -30,5 +31,6 @@ namespace Storeonline.Models
         public virtual DbSet<InvoiceDetails> InvoiceDetails { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
 
+        public System.Data.Entity.DbSet<Storeonline.Models.PaymentCategory> PaymentCategories { get; set; }
     }
 }
